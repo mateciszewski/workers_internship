@@ -5,3 +5,4 @@ export interface Employee {
   age: number;
   city: string;
 }
+// Byłem tu ;P
