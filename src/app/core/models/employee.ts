@@ -6,3 +6,4 @@ export interface Employee {
   city: string;
 }
 // Byłem tu ;P
+// i ja tez
