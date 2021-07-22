@@ -37,7 +37,7 @@ export class WorkersService {
       (key: string) => `${filters[key]}`.toLowerCase() === `${worker[key]}`.toLowerCase()
     );
   }
-
+//komentarz
   public initialize(workers: Employee[]) {
     this.workers$.next(workers);
   }
