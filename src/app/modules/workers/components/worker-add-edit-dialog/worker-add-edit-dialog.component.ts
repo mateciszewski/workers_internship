@@ -10,8 +10,8 @@ import { Employee } from "src/app/core/models/employee";
 })
 
 export class WorkerAddEditDialogComponent implements OnInit{
-    @Input() state: Employee;
-    @Output() changed = new EventEmitter<Employee>();
+    @Input() state: Omit<Employee, 'id'>;
+    @Output() changed = new EventEmitter<Omit<Employee, 'id'>>();
 
     public addForm=this.formBuilder.group({
         name: new FormControl('', [Validators.required]),
