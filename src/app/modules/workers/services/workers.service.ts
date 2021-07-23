@@ -1,8 +1,10 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {Employee} from '../../../core/models/employee';
-import {EmployeeFiltersState} from '../../../core/models/employee-filters-state';
+import { Injectable } from '@angular/core';
+
+import { Employee } from '../../../core/models/employee';
+import { EmployeeFiltersState } from '../../../core/models/employee-filters-state';
+
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +33,7 @@ export class WorkersService {
 
   private checkWorkerIsValid(
     worker: Employee,
-    filters: Partial<Employee>
+    filters: EmployeeFiltersState
   ): boolean {
     return Object.keys(filters).every(
       (key: string) => `${filters[key]}`.toLowerCase() === `${worker[key]}`.toLowerCase()
@@ -46,7 +48,7 @@ export class WorkersService {
     this.workers$.next([...this.workers$.value, worker]);
   }
 
-  public setFilters(filter: Partial<Employee> = {}): void {
+  public setFilters(filter: EmployeeFiltersState = {}): void {
     this.filtersSubject$.next(filter);
   }
 }

@@ -8,7 +8,11 @@ import { Employee } from '../../../../core/models/employee';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkersListComponent {
-  public displayedColumns: string[] = ['name', 'age', 'city', 'isWorking'];
-  
+  public displayedColumns: string[] = ['name', 'age', 'city', 'isWorking', 'actions'];
+
   @Input() workers: Employee[];
+
+  public onEditWorkerClick(worker: Employee): void { }
+
+  public onDeleteWorkerClick(worker: Employee): void { }
 }

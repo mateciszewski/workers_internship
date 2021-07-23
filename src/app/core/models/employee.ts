@@ -1,8 +1,5 @@
-export interface Employee {
-  [key: string]: any;
-  id: number;
-  name: string;
-  isWorking: boolean;
-  age: number;
-  city: string;
+import { EmployeeEntity } from "./employee-entity";
+
+export interface Employee extends EmployeeEntity {
+    id?: number;
 }

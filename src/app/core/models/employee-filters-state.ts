@@ -1,3 +1,3 @@
-import { Employee } from './employee';
+import { EmployeeEntity } from "./employee-entity";
 
-export type EmployeeFiltersState = Partial<Employee>;
+export type EmployeeFiltersState = Partial<EmployeeEntity>;

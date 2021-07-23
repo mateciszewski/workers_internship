@@ -1,3 +1,15 @@
 .empty-workers-table {
   text-align: center;
 }
+
+.actions-header-cell, .actions-cell {
+  justify-content: center;
+}
+
+mat-icon {
+  margin-left: 5px;
+}
+
+mat-row:hover, .action:hover {
+  cursor: pointer;
+}
