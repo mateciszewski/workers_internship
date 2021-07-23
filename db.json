@@ -1,0 +1,53 @@
+{
+  "workers": [
+    {
+      "id": 0,
+      "name": "Patryk",
+      "age": 23,
+      "isWorking": true,
+      "city": "Olsztyn"
+    },
+    {
+      "id": 1,
+      "name": "Kamil",
+      "age": 23,
+      "isWorking": true,
+      "city": "Olsztyn"
+    },
+    {
+      "id": 2,
+      "name": "Dawid",
+      "age": 23,
+      "isWorking": true,
+      "city": "Olsztyn"
+    },
+    {
+      "id": 3,
+      "name": "Błażej",
+      "age": 23,
+      "isWorking": true,
+      "city": "Olsztyn"
+    },
+    {
+      "id": 4,
+      "name": "Konrad",
+      "age": 23,
+      "isWorking": true,
+      "city": "Olsztyn"
+    },
+    {
+      "id": 5,
+      "name": "Mateusz",
+      "age": 23,
+      "isWorking": true,
+      "city": "Olsztyn"
+    },
+    {
+      "name": "",
+      "isWorking": null,
+      "age": null,
+      "city": "dasdsa",
+      "id": 6
+    }
+  ]
+}
