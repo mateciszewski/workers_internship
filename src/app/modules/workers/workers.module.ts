@@ -11,11 +11,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexModule } from '@angular/flex-layout';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { WorkerAddEditDialogComponent } from './components/worker-add-edit-dialog/worker-add-edit-dialog.component';
 
 @NgModule({
-  declarations: [WorkersPageComponent, WorkerTileComponent, WorkersListComponent, WorkersFiltersComponent],
+  declarations: [WorkersPageComponent, WorkerTileComponent, WorkersListComponent, WorkersFiltersComponent, WorkerAddEditDialogComponent],
   imports: [
     CommonModule,
+    MatSelectModule,
+    MatButtonModule,
     WorkersRoutingModule,
     FormsModule,
     MatFormFieldModule,
@@ -23,7 +28,7 @@ import { MatButtonModule } from '@angular/material/button';
     ReactiveFormsModule,
     FlexModule,
     MatTableModule,
-    MatButtonModule,
+    MatDialogModule,
   ]
 })
 export class WorkersModule { }

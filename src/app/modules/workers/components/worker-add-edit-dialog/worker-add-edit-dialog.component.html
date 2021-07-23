@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Dodawanie pracownika</h1>
+<div mat-dialog-content>
+    <form class="addForm" [formGroup]="addForm">
+    <mat-form-field appearance="fill">
+        <mat-label>Nazwa</mat-label>
+        <input matInput formControlName="name" autocomplete="off" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Wiek</mat-label>
+        <input matInput formControlName="age" autocomplete="off" required>
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+        <mat-label>Miasto</mat-label>
+        <input matInput formControlName="city" autocomplete="off" required>
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+        <mat-label>Status pracy</mat-label>
+        <mat-select formControlName="isWorking" required>
+            <mat-option [value]="true">pracujący</mat-option>
+            <mat-option [value]="false">bezrobotny</mat-option>
+        </mat-select>
+    </mat-form-field>
+</form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="cancel()">Anuluj</button>
+    <button mat-button (click)="add()" [disabled]="addForm.invalid">Dodaj</button>
+</div>
