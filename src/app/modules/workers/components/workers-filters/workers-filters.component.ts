@@ -23,7 +23,7 @@ export class WorkersFiltersComponent implements OnInit, OnDestroy {
       name: new FormControl(this.state.name),
       age: new FormControl(this.state.age, [Validators.pattern('^[0-9]+$'), Validators.min(15), Validators.max(200)]),
       city: new FormControl(this.state.city),
-      isWorking: new FormControl(["true", "false"].includes(String(this.state.isWorking)) ? String(this.state.isWorking) : null)
+      isWorking: new FormControl(["true", "false"].includes(String(this.state.isWorking)) ? Boolean(this.state.isWorking) : null)
     });
 
     this.subscriptionFormValueChanges = this.form.valueChanges.subscribe(value => {

@@ -18,8 +18,8 @@
     <mat-label>Status pracy</mat-label>
     <mat-select formControlName="isWorking">
         <mat-option>wszystkie</mat-option>
-        <mat-option value="true">pracujący</mat-option>
-        <mat-option value="false">bezrobotny</mat-option>
+        <mat-option [value]="true">pracujący</mat-option>
+        <mat-option [value]="false">bezrobotny</mat-option>
     </mat-select>
   </mat-form-field>
 
