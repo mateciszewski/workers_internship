@@ -1,3 +1,3 @@
-import {Employee} from './employee';
+import { Employee } from './employee';
 
 export type EmployeeFiltersState = Partial<Employee>;

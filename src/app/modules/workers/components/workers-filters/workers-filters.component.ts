@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {EmployeeFiltersState} from '../../../../core/models/employee-filters-state';
-import {FormControl, FormGroup} from '@angular/forms';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { EmployeeFiltersState } from '../../../../core/models/employee-filters-state';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-workers-filters',

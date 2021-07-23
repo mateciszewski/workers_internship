@@ -1,6 +1,6 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {WorkersPageComponent} from './pages/workers-page/workers-page.component';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { WorkersPageComponent } from './pages/workers-page/workers-page.component';
 
 
 const routes: Routes = [

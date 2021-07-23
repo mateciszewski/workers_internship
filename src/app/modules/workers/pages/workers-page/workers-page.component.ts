@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {EmployeeFiltersState} from '../../../../core/models/employee-filters-state';
-import {WorkersFacadeService} from './workers-facade.service';
+import { Component, OnInit } from '@angular/core';
+import { EmployeeFiltersState } from '../../../../core/models/employee-filters-state';
+import { WorkersFacadeService } from './workers-facade.service';
 
 @Component({
   selector: 'app-workers-page',

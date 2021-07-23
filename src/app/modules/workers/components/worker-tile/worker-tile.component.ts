@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {Employee} from '../../../../core/models/employee';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Employee } from '../../../../core/models/employee';
 
 @Component({
   selector: 'app-worker-tile',

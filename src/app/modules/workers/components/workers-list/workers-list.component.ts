@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {Employee} from '../../../../core/models/employee';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Employee } from '../../../../core/models/employee';
 
 @Component({
   selector: 'app-workers-list',
@@ -8,5 +8,7 @@ import {Employee} from '../../../../core/models/employee';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkersListComponent {
+  public displayedColumns: string[] = ['name', 'age', 'city', 'isWorking'];
+  
   @Input() workers: Employee[];
 }
