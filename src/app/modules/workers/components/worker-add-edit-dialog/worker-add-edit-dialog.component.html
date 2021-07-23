@@ -25,6 +25,6 @@
 </form>
 </div>
 <div mat-dialog-actions>
-    <button mat-button (click)="cancel()">Anuluj</button>
+    <button mat-button mat-dialog-close>Anuluj</button>
     <button mat-button (click)="add()" [disabled]="addForm.invalid">Dodaj</button>
 </div>
