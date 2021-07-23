@@ -15,6 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { WorkerAddEditDialogComponent } from './components/worker-add-edit-dialog/worker-add-edit-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatDialogModule,
     MatIconModule,
     MatTooltipModule,
+    MatToolbarModule,
   ]
 })
 export class WorkersModule { }

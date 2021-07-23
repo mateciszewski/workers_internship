@@ -34,7 +34,7 @@ export class WorkersPageComponent implements OnInit, OnDestroy {
     this.subscriptionQueryParamsFilter = this.queryParamsFilter$.subscribe((filters) => {
       this.workersFacade.setFilters(filters);
     });
-
+    
     this.workersFacade.loadWorkers();
   }
 

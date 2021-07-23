@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-workers-filters',
   templateUrl: './workers-filters.component.html',
+  styleUrls: ['./workers-filters.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkersFiltersComponent implements OnInit, OnDestroy {
@@ -20,17 +21,24 @@ export class WorkersFiltersComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.form = new FormGroup({
       name: new FormControl(this.state.name),
-      age: new FormControl(this.state.age, [Validators.min(15), Validators.max(200)]),
+      age: new FormControl(this.state.age, [Validators.pattern('^[0-9]+$'), Validators.min(15), Validators.max(200)]),
       city: new FormControl(this.state.city),
-      isWorking: new FormControl(this.state.isWorking)
+      isWorking: new FormControl(["true", "false"].includes(String(this.state.isWorking)) ? String(this.state.isWorking) : null)
     });
 
     this.subscriptionFormValueChanges = this.form.valueChanges.subscribe(value => {
-      this.changed.emit(value);
+      const newValue = Object.keys(value).reduce((acc, key) => {
+        return {...acc, [key]: value[key] !== "" ? value[key] : null}
+      }, {});
+      this.changed.emit(newValue);
     });
   }
 
   public ngOnDestroy(): void {
     this.subscriptionFormValueChanges.unsubscribe();
+  }
+
+  public resetFilters(): void {
+    this.form.reset();
   }
 }

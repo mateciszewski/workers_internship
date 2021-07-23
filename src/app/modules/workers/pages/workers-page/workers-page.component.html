@@ -1,5 +1,12 @@
+<mat-toolbar>
+  <a class="toolbar-logo" routerLink="/">
+    <span>Pracownicy <mat-icon>people</mat-icon></span>
+  </a>
+  <span class="spacer"></span>
+  <button mat-stroked-button (click)="openDialog()">Dodaj pracownika <mat-icon>add_circle_outline</mat-icon></button>
+</mat-toolbar>
+
 <div class="workers-page">
   <app-workers-filters [state]="filters$ | async" (changed)="onFiltersChanged($event)"></app-workers-filters>
-  <button mat-button (click)="openDialog()">Dodaj pracownika</button>
   <app-workers-list [workers]="list$ | async"></app-workers-list>
 </div>
