@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WorkersPageComponent } from './pages/workers-page/workers-page.component';
 import { WorkersRoutingModule } from './workers-routing.module';
-import { WorkersListComponent } from './components/workers-list/workers-list.component';
+import { WorkersTableComponent } from './components/workers-table/workers-table.component';
 import { WorkersFiltersComponent } from './components/workers-filters/workers-filters.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -20,7 +20,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 @NgModule({
   declarations: [
     WorkersPageComponent,
-    WorkersListComponent,
+    WorkersTableComponent,
     WorkersFiltersComponent,
     WorkerAddEditDialogComponent
   ],
