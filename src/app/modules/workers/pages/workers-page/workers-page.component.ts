@@ -49,7 +49,7 @@ export class WorkersPageComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      if(result) this.workersFacade.edit(worker.id, result);
     });
   }
 
@@ -71,7 +71,7 @@ export class WorkersPageComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      if(result) this.workersFacade.add(result);
     });
   }
 

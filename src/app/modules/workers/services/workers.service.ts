@@ -35,10 +35,6 @@ export class WorkersService {
     worker: EmployeeEntity,
     filters: EmployeeFiltersState
   ): boolean {
-    // return Object.keys(filters).every(
-    //   (key: string) => `${filters[key]}`.toLowerCase() === `${worker[key]}`.toLowerCase()
-    // );
-
     return Object.keys(filters).every(
       (key: string) => !isNaN(filters[key]) ?
         Number(filters[key]) === Number(worker[key]) : `${worker[key]}`.toLowerCase().startsWith(`${filters[key]}`.toLowerCase()) 
@@ -54,7 +50,12 @@ export class WorkersService {
   }
 
   public edit(workerId: number, worker: EmployeeEntity) {
-    this.workers$.next([...this.removeWorkersWithId(workerId), worker]);
+    let editedWorkers = this.workers$.value;
+
+    const index = editedWorkers.findIndex(worker => worker.id === workerId);
+    editedWorkers[index] = worker;
+
+    this.workers$.next(editedWorkers);
   }
 
   public delete(workerId: number): void {

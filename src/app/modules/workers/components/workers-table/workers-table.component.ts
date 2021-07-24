@@ -1,6 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { EmployeeEntity } from '../../../../core/models/employee-entity';
 import { EmployeeFiltersState } from 'src/app/core/models/employee-filters-state';
 
@@ -10,7 +8,7 @@ import { EmployeeFiltersState } from 'src/app/core/models/employee-filters-state
   styleUrls: ['./workers-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WorkersTableComponent implements OnInit {
+export class WorkersTableComponent implements OnChanges {
   public displayedColumns: string[] = ['name', 'age', 'city', 'isWorking', 'actions'];
 
   @Input() workers: EmployeeEntity[];
@@ -19,14 +17,12 @@ export class WorkersTableComponent implements OnInit {
   @Output() removedEmployee = new EventEmitter<EmployeeEntity>();
   @Output() editedEmployee = new EventEmitter<EmployeeEntity>();
 
-  public emptyMessage$: Observable<string>;
+  public emptyMessage: string;
 
-  public ngOnInit(): void {
-    this.emptyMessage$ = of(this.filters).pipe(
-      map(filters => {
-        return Object.keys(filters).length === 0 ? 'Brak danych.' : 'Nie znaleziono wyników dla podanych kryteriów.';
-      })
-    );
+  public ngOnChanges(changes: SimpleChanges) {
+    if(changes.filters?.currentValue !== changes.filters?.previousValue) {
+      this.emptyMessage = Object.keys(this.filters).length === 0 ? 'Brak danych.' : 'Nie znaleziono wyników dla podanych kryteriów.';
+    }
   }
 
   public onEditWorkerClick(worker: EmployeeEntity): void {

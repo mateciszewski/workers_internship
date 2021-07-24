@@ -28,7 +28,7 @@
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;" (doubleclick)="onEditWorkerClick(row)"></mat-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
 
-<div class="empty-workers-table" *ngIf="workers.length === 0">{{ emptyMessage$ | async }}</div>
+<div class="empty-workers-table" *ngIf="workers.length === 0">{{ emptyMessage }}</div>

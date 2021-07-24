@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { Employee } from 'src/app/core/models/employee';
 import { EmployeeFiltersState } from 'src/app/core/models/employee-filters-state';
 
 import { WorkersService } from '../../services/workers.service';
@@ -15,14 +16,26 @@ export class WorkersFacadeService {
 
   constructor(private workersService: WorkersService, private workersClient: WorkersClientService) { }
 
+  public setFilters(filtersState: EmployeeFiltersState): void {
+    this.workersService.setFilters(filtersState);
+  }
+
+  public add(employee: Employee): void {
+    this.workersClient.post(employee).subscribe(worker => {
+      this.workersService.add(worker);
+    });
+  }
+
   public loadWorkers(): void {
-    this.workersClient.get().subscribe((workers) => {
+    this.workersClient.get().subscribe(workers => {
       this.workersService.initialize(workers);
     });
   }
 
-  public setFilters(filtersState: EmployeeFiltersState): void {
-    this.workersService.setFilters(filtersState);
+  public edit(employeeId: number, employee: Employee): void {
+    this.workersClient.put(employeeId, employee).subscribe(worker => {
+      this.workersService.edit(employeeId, worker);
+    });
   }
 
   public delete(worker: EmployeeEntity): void {

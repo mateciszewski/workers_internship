@@ -1,6 +1,13 @@
 {
   "employees": [
     {
+      "id": 1,
+      "name": "Dawid",
+      "isWorking": true,
+      "age": 22,
+      "city": "Olsztyn"
+    },
+    {
       "id": 2,
       "name": "Kamil",
       "isWorking": true,
