@@ -4,6 +4,7 @@ import { EmployeeFiltersState } from 'src/app/core/models/employee-filters-state
 
 import { WorkersService } from '../../services/workers.service';
 import { WorkersClientService } from '../../clients/workers-client.service';
+import { Employee } from 'src/app/core/models/employee';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,11 @@ export class WorkersFacadeService {
 
   public setFilters(filtersState: EmployeeFiltersState): void {
     this.workersService.setFilters(filtersState);
+  }
+
+  public delete(worker: Employee): void {
+    this.workersClient.delete(worker.id).subscribe(_ => {
+      this.workersService.delete(worker.id);
+    });
   }
 }

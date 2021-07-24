@@ -4,6 +4,7 @@ import { WorkersPageComponent } from './pages/workers-page/workers-page.componen
 import { WorkersRoutingModule } from './workers-routing.module';
 import { WorkersTableComponent } from './components/workers-table/workers-table.component';
 import { WorkersFiltersComponent } from './components/workers-filters/workers-filters.component';
+import { DeleteConfirmationDialog } from './components/delete-confirmation-dialog/delete-confirmation-dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,6 +23,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     WorkersPageComponent,
     WorkersTableComponent,
     WorkersFiltersComponent,
+    DeleteConfirmationDialog,
     WorkerAddEditDialogComponent
   ],
   imports: [

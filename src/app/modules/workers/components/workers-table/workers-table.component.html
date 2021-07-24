@@ -31,4 +31,4 @@
   <mat-row *matRowDef="let row; columns: displayedColumns;" (doubleclick)="onEditWorkerClick(row)"></mat-row>
 </mat-table>
 
-<div class="empty-workers-table" *ngIf="workers.length === 0">Brak danych.</div>
+<div class="empty-workers-table" *ngIf="workers.length === 0">{{ emptyMessage$ | async }}</div>

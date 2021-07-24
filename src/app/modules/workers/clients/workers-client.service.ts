@@ -13,19 +13,19 @@ export class WorkersClientService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public post(employee: Required<EmployeeEntity>): Observable<Employee> {
-    return this.httpClient.post<Required<Employee>>(this.apiUrl, employee);
+  public post(employee: EmployeeEntity): Observable<Employee> {
+    return this.httpClient.post<Employee>(this.apiUrl, employee);
   }
 
   public get(): Observable<Employee[]> {
-    return this.httpClient.get<Required<Employee>[]>(this.apiUrl);
+    return this.httpClient.get<Employee[]>(this.apiUrl);
   }
 
-  public put(employeeId: number, employee: Required<EmployeeEntity>): any {
-    return this.httpClient.put<Required<Employee>>(`${this.apiUrl}/${employeeId}`, employee);
+  public put(employeeId: number, employee: EmployeeEntity): any {
+    return this.httpClient.put<Employee>(`${this.apiUrl}/${employeeId}`, employee);
   }
 
   public delete(employeeId: number): Observable<Employee> {
-    return this.httpClient.delete<Required<Employee>>(`${this.apiUrl}/${employeeId}`);
+    return this.httpClient.delete<Employee>(`${this.apiUrl}/${employeeId}`);
   }
 }

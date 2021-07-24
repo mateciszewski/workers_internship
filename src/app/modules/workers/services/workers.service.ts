@@ -48,7 +48,19 @@ export class WorkersService {
     this.workers$.next([...this.workers$.value, worker]);
   }
 
+  public edit(workerId: number, worker: Employee) {
+    this.workers$.next([...this.removeWorkersWithId(workerId), worker]);
+  }
+
+  public delete(workerId: number): void {
+    this.workers$.next(this.removeWorkersWithId(workerId));
+  }
+
   public setFilters(filter: EmployeeFiltersState = {}): void {
     this.filtersSubject$.next(filter);
+  }
+
+  private removeWorkersWithId(workerId: number): Employee[] {
+    return this.workers$.value.filter(worker => worker.id !== workerId);
   }
 }
