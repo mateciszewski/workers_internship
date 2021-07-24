@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, OnInit, Input, Output, EventEmitter} from "@angular/core";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
-import { EmployeeEntity } from "src/app/core/models/employee-entity";
+import { Employee } from "src/app/core/models/employee";
 
 @Component({
     selector:'app-worker-add-edit-dialog',
@@ -10,8 +10,8 @@ import { EmployeeEntity } from "src/app/core/models/employee-entity";
 })
 
 export class WorkerAddEditDialogComponent implements OnInit{
-    @Input() state: EmployeeEntity;
-    @Output() changed = new EventEmitter<EmployeeEntity>();
+    @Input() state: Employee;
+    @Output() changed = new EventEmitter<Employee>();
 
     public addForm=this.formBuilder.group({
         name: new FormControl('', [Validators.required]),

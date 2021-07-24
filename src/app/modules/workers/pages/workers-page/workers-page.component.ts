@@ -6,9 +6,9 @@ import { map, distinctUntilChanged } from 'rxjs/operators';
 
 import { EmployeeFiltersState } from '../../../../core/models/employee-filters-state';
 import { WorkersFacadeService } from './workers-facade.service';
-import { EmployeeEntityOrigin } from 'src/app/core/models/employee-entity-origin';
+import { EmployeeOrigin } from 'src/app/core/models/employee-origin';
 import { WorkerAddEditDialogComponent } from "../../components/worker-add-edit-dialog/worker-add-edit-dialog.component";
-import { Employee } from 'src/app/core/models/employee';
+import { EmployeeEntity } from 'src/app/core/models/employee-entity';
 import { DeleteConfirmationDialog } from '../../components/delete-confirmation-dialog/delete-confirmation-dialog';
 
 @Component({
@@ -42,7 +42,7 @@ export class WorkersPageComponent implements OnInit {
     });
   }
 
-  public onRemovedEmployee(worker: Employee): void {
+  public onRemovedEmployee(worker: EmployeeEntity): void {
     const dialogRef = this.matDialog.open(DeleteConfirmationDialog, {
       width: '400px',
       data: worker
@@ -58,6 +58,6 @@ export class WorkersPageComponent implements OnInit {
   }
 
   private checkKeyInEmployeeEntity(key: string): boolean {
-    return Object.keys(EmployeeEntityOrigin).includes(key);
+    return Object.keys(EmployeeOrigin).includes(key);
   }
 }

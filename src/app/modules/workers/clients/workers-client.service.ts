@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { Employee } from '../../../core/models/employee';
 import { EmployeeEntity } from '../../../core/models/employee-entity';
+import { Employee } from '../../../core/models/employee';
 
 @Injectable({
   providedIn: 'root'
@@ -13,19 +13,19 @@ export class WorkersClientService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public post(employee: EmployeeEntity): Observable<Employee> {
-    return this.httpClient.post<Employee>(this.apiUrl, employee);
+  public post(employee: Employee): Observable<EmployeeEntity> {
+    return this.httpClient.post<EmployeeEntity>(this.apiUrl, employee);
   }
 
-  public get(): Observable<Employee[]> {
-    return this.httpClient.get<Employee[]>(this.apiUrl);
+  public get(): Observable<EmployeeEntity[]> {
+    return this.httpClient.get<EmployeeEntity[]>(this.apiUrl);
   }
 
-  public put(employeeId: number, employee: EmployeeEntity): any {
-    return this.httpClient.put<Employee>(`${this.apiUrl}/${employeeId}`, employee);
+  public put(employeeId: number, employee: Employee): Observable<EmployeeEntity> {
+    return this.httpClient.put<EmployeeEntity>(`${this.apiUrl}/${employeeId}`, employee);
   }
 
-  public delete(employeeId: number): Observable<Employee> {
-    return this.httpClient.delete<Employee>(`${this.apiUrl}/${employeeId}`);
+  public delete(employeeId: number): Observable<EmployeeEntity> {
+    return this.httpClient.delete<EmployeeEntity>(`${this.apiUrl}/${employeeId}`);
   }
 }

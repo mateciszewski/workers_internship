@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Employee } from 'src/app/core/models/employee';
+import { EmployeeEntity } from 'src/app/core/models/employee-entity';
 
 @Component({
   selector: 'delete-confirmation-dialog',
@@ -10,6 +10,6 @@ import { Employee } from 'src/app/core/models/employee';
 export class DeleteConfirmationDialog {
   constructor(
       public dialogRef: MatDialogRef<DeleteConfirmationDialog>, 
-      @Inject(MAT_DIALOG_DATA) public worker: Employee
+      @Inject(MAT_DIALOG_DATA) public worker: EmployeeEntity
   ) { }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Employee } from '../../../core/models/employee';
+import { EmployeeEntity } from '../../../core/models/employee-entity';
 import { EmployeeFiltersState } from '../../../core/models/employee-filters-state';
 
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
@@ -10,10 +10,10 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class WorkersService {
-  private workers$: BehaviorSubject<Employee[]>;
+  private workers$: BehaviorSubject<EmployeeEntity[]>;
   private filtersSubject$: BehaviorSubject<EmployeeFiltersState> = new BehaviorSubject({});
 
-  public list$: Observable<Employee[]>;
+  public list$: Observable<EmployeeEntity[]>;
   public filters$ = this.filtersSubject$.asObservable()
     .pipe(map(filters => Object.keys(filters).reduce((acc, key) => ({
       ...acc,
@@ -25,14 +25,14 @@ export class WorkersService {
 
     this.list$ = combineLatest([this.workers$, this.filters$]).pipe(
       map(([workers, filters]) =>
-        workers.filter((worker: Employee) => this.checkWorkerIsValid(worker, filters)
+        workers.filter((worker: EmployeeEntity) => this.checkWorkerIsValid(worker, filters)
         )
       )
     );
   }
 
   private checkWorkerIsValid(
-    worker: Employee,
+    worker: EmployeeEntity,
     filters: EmployeeFiltersState
   ): boolean {
     // return Object.keys(filters).every(
@@ -45,15 +45,15 @@ export class WorkersService {
     );
   }
 
-  public initialize(workers: Employee[]) {
+  public initialize(workers: EmployeeEntity[]) {
     this.workers$.next(workers);
   }
 
-  public add(worker: Employee): void {
+  public add(worker: EmployeeEntity): void {
     this.workers$.next([...this.workers$.value, worker]);
   }
 
-  public edit(workerId: number, worker: Employee) {
+  public edit(workerId: number, worker: EmployeeEntity) {
     this.workers$.next([...this.removeWorkersWithId(workerId), worker]);
   }
 
@@ -65,7 +65,7 @@ export class WorkersService {
     this.filtersSubject$.next(filter);
   }
 
-  private removeWorkersWithId(workerId: number): Employee[] {
+  private removeWorkersWithId(workerId: number): EmployeeEntity[] {
     return this.workers$.value.filter(worker => worker.id !== workerId);
   }
 }

@@ -4,6 +4,7 @@
 
 .actions-header-cell, .actions-cell {
   justify-content: center;
+  user-select: none;
 }
 
 mat-icon {

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Employee } from '../../../../core/models/employee';
+import { EmployeeEntity } from '../../../../core/models/employee-entity';
 import { EmployeeFiltersState } from 'src/app/core/models/employee-filters-state';
 
 @Component({
@@ -13,11 +13,11 @@ import { EmployeeFiltersState } from 'src/app/core/models/employee-filters-state
 export class WorkersTableComponent implements OnInit {
   public displayedColumns: string[] = ['name', 'age', 'city', 'isWorking', 'actions'];
 
-  @Input() workers: Employee[];
+  @Input() workers: EmployeeEntity[];
   @Input() filters: EmployeeFiltersState;
 
-  @Output() removedEmployee = new EventEmitter<Employee>();
-  @Output() editedEmployee = new EventEmitter<Employee>();
+  @Output() removedEmployee = new EventEmitter<EmployeeEntity>();
+  @Output() editedEmployee = new EventEmitter<EmployeeEntity>();
 
   public emptyMessage$: Observable<string>;
 
@@ -29,11 +29,11 @@ export class WorkersTableComponent implements OnInit {
     );
   }
 
-  public onEditWorkerClick(worker: Employee): void {
+  public onEditWorkerClick(worker: EmployeeEntity): void {
     this.editedEmployee.emit(worker);
   }
 
-  public onDeleteWorkerClick(worker: Employee): void {
+  public onDeleteWorkerClick(worker: EmployeeEntity): void {
     this.removedEmployee.emit(worker);
   }
 }
