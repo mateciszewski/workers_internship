@@ -2,8 +2,10 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnI
 
 import { EmployeeFiltersState } from 'src/app/core/models/employee-filters-state';
 
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-workers-filters',
@@ -26,7 +28,7 @@ export class WorkersFiltersComponent implements OnInit, OnDestroy {
       isWorking: new FormControl(["true", "false"].includes(String(this.state.isWorking)) ? Boolean(this.state.isWorking) : null)
     });
 
-    this.subscriptionFormValueChanges = this.form.valueChanges.subscribe(value => {
+    this.subscriptionFormValueChanges = this.form.valueChanges.pipe(debounceTime(100), distinctUntilChanged()).subscribe(value => {
       const newValue = Object.keys(value).reduce((acc, key) => {
         return {...acc, [key]: value[key] !== "" ? value[key] : null}
       }, {});

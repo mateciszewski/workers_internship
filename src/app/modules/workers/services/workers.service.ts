@@ -35,8 +35,13 @@ export class WorkersService {
     worker: Employee,
     filters: EmployeeFiltersState
   ): boolean {
+    // return Object.keys(filters).every(
+    //   (key: string) => `${filters[key]}`.toLowerCase() === `${worker[key]}`.toLowerCase()
+    // );
+
     return Object.keys(filters).every(
-      (key: string) => `${filters[key]}`.toLowerCase() === `${worker[key]}`.toLowerCase()
+      (key: string) => !isNaN(filters[key]) ?
+        Number(filters[key]) === Number(worker[key]) : `${worker[key]}`.toLowerCase().startsWith(`${filters[key]}`.toLowerCase()) 
     );
   }
 
