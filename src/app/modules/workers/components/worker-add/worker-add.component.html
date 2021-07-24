@@ -1,19 +1,19 @@
-<form [formGroup]="addform" class="workers-filters" fxLayout="row" (ngSubmit)="onSubmit()">
-  <mat-form-field fxFlex="20%">
+<form [formGroup]="addform" class="workers-filters" fxLayout="column" (ngSubmit)="onSubmit()">
+  <mat-form-field fyFlex="20%">
     <mat-label>Name</mat-label>
-    <input matInput type="text" formControlName="name">
+    <input matInput type="text" formControlName="name" />
   </mat-form-field>
-  <mat-form-field fxFlex="20%" fxFlexOffset="5%">
+  <mat-form-field fyFlex="20%" fxFlexOffset="5%">
     <mat-label>Czy pracuje</mat-label>
-    <input  matInput type="text" formControlName="isWorking">
+    <input matInput type="text" formControlName="isWorking" />
   </mat-form-field>
-  <mat-form-field fxFlex="20%" fxFlexOffset="5%">
+  <mat-form-field fyFlex="20%" fxFlexOffset="5%">
     <mat-label>Age</mat-label>
-    <input matInput type="number" formControlName="age">
+    <input matInput type="number" formControlName="age" />
   </mat-form-field>
   <mat-form-field fxFlex="20%" fxFlexOffset="5%">
     <mat-label>City</mat-label>
-    <input matInput type="text" formControlName="city">
+    <input matInput type="text" formControlName="city" />
   </mat-form-field>
-    <button type="submit">Wyślij</button>
+  <button mat-raised-button [mat-dialog-close]="addform" type="submit">Dodaj!</button>
 </form>

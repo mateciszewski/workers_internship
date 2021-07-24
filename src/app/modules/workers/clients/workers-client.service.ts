@@ -1,23 +1,22 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
-import {Employee} from '../../../core/models/employee';
-import {catchError} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import type { HttpClient } from '@angular/common/http';
+import type { Employee } from '../../../core/models/employee';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WorkersClientService {
-  constructor(private httpClient: HttpClient) {
-  }
+  constructor(private httpClient: HttpClient) {}
 
   get() {
-      return this.httpClient.get<Employee[]>('http://localhost:3000/workers');
+    return this.httpClient.get<Employee[]>('http://localhost:3000/workers');
   }
 
   post(worker: Employee) {
     return this.httpClient.post<Employee>('http://localhost:3000/workers', { ...worker });
   }
+
+  delete(worker: Employee) {
+    return this.httpClient.delete<Employee>('http://localhost:3000/workers/' + worker.id);
+  }
 }
-
-

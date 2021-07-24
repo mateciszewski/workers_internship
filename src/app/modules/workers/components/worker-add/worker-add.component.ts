@@ -1,14 +1,8 @@
 import { FormControl, FormGroup } from '@angular/forms';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import { Employee } from 'src/app/core/models/employee';
-import { WorkersService } from '../../services/workers.service';
-import { WorkersFacadeService } from '../../pages/workers-page/workers-facade.service';
+import { ChangeDetectionStrategy, Component, Output, EventEmitter } from '@angular/core';
+import type { OnInit } from '@angular/core';
+import type { Employee } from 'src/app/core/models/employee';
+import type { WorkersFacadeService } from '../../pages/workers-page/workers-facade.service';
 
 @Component({
   selector: 'app-worker-add',
@@ -16,7 +10,6 @@ import { WorkersFacadeService } from '../../pages/workers-page/workers-facade.se
   styleUrls: ['./worker-add.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 export class WorkerAddComponent implements OnInit {
   @Output() newWorker = new EventEmitter<Employee>();
 
