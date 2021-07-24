@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Dodawanie pracownika</h1>
+<h1 mat-dialog-title>{{ titleText }}</h1>
 <div mat-dialog-content>
     <form class="addForm" [formGroup]="addForm">
     <mat-form-field appearance="fill">
@@ -7,7 +7,7 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
         <mat-label>Wiek</mat-label>
-        <input matInput formControlName="age" autocomplete="off" required>
+        <input type="number" matInput formControlName="age" autocomplete="off" required>
     </mat-form-field>
     
     <mat-form-field appearance="fill">
@@ -26,5 +26,5 @@
 </div>
 <div mat-dialog-actions>
     <button mat-button mat-dialog-close>Anuluj</button>
-    <button mat-button (click)="add()" [disabled]="addForm.invalid">Dodaj</button>
+    <button mat-button (click)="onClick()" [disabled]="addForm.invalid">{{ buttonText }}</button>
 </div>

@@ -42,6 +42,17 @@ export class WorkersPageComponent implements OnInit {
     });
   }
 
+  public onEditEmployee(worker: EmployeeEntity): void {
+    const dialogRef = this.matDialog.open(WorkerAddEditDialogComponent, {
+      width: '350px',
+      data: worker
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+  }
+
   public onRemovedEmployee(worker: EmployeeEntity): void {
     const dialogRef = this.matDialog.open(DeleteConfirmationDialog, {
       width: '400px',
@@ -53,8 +64,15 @@ export class WorkersPageComponent implements OnInit {
     });
   }
 
-  public openDialog(): void {
-    this.matDialog.open(WorkerAddEditDialogComponent);
+  public openAddDialog(): void {
+    const dialogRef = this.matDialog.open(WorkerAddEditDialogComponent, {
+      width: '350px',
+      data: null
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
 
   private checkKeyInEmployeeEntity(key: string): boolean {

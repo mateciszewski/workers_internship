@@ -1,6 +1,8 @@
-import { Component, ChangeDetectionStrategy, OnInit, Input, Output, EventEmitter} from "@angular/core";
-import { FormBuilder, FormControl, Validators } from "@angular/forms";
+import { Component, ChangeDetectionStrategy, Inject } from "@angular/core";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Employee } from "src/app/core/models/employee";
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { EmployeeOrigin } from "src/app/core/models/employee-origin";
 
 @Component({
     selector:'app-worker-add-edit-dialog',
@@ -9,30 +11,30 @@ import { Employee } from "src/app/core/models/employee";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class WorkerAddEditDialogComponent implements OnInit{
-    @Input() state: Employee;
-    @Output() changed = new EventEmitter<Employee>();
+export class WorkerAddEditDialogComponent{
+    public titleText: string;
+    public addForm: FormGroup;
+    public buttonText: string;
 
-    public addForm=this.formBuilder.group({
-        name: new FormControl('', [Validators.required]),
-        age: new FormControl('', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.min(15), Validators.max(200)]),
-        city: new FormControl('', [Validators.required]),
-        isWorking: new FormControl('', [Validators.required])
-    });
+    constructor(
+        public dialogRef: MatDialogRef<WorkerAddEditDialogComponent>, 
+        @Inject(MAT_DIALOG_DATA) public data: Employee | null, 
+        private formBuilder: FormBuilder
+    ) {
+        this.titleText = this.data === null ? 'Dodawanie' : `Edytowanie ${this.data.name}`;
+        this.buttonText = this.data === null ? 'Dodaj' : 'Edytuj';
 
-    constructor(private formBuilder: FormBuilder) { }
+        if(this.data === null) this.data = EmployeeOrigin;
 
-    ngOnInit(): void {
-        this.addForm.valueChanges.subscribe(value =>{
-            this.changed.emit(value);
+        this.addForm = this.formBuilder.group({
+            name: new FormControl(this.data.name, [Validators.required]),
+            age: new FormControl(this.data.age, [Validators.required, Validators.min(15), Validators.max(200)]),
+            city: new FormControl(this.data.city, [Validators.required]),
+            isWorking: new FormControl(this.data.isWorking, [Validators.required])
         });
     }
 
-    public add(){
-
-    }
-
-    public cancel(){
-
+    public onClick(): void {
+        this.dialogRef.close(this.addForm.value);
     }
 }

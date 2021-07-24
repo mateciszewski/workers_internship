@@ -3,10 +3,10 @@
     <span>Pracownicy <mat-icon>people</mat-icon></span>
   </a>
   <span class="spacer"></span>
-  <button mat-stroked-button (click)="openDialog()">Dodaj pracownika <mat-icon>add_circle_outline</mat-icon></button>
+  <button mat-stroked-button (click)="openAddDialog()">Dodaj pracownika <mat-icon>add_circle_outline</mat-icon></button>
 </mat-toolbar>
 
 <div class="workers-page">
   <app-workers-filters [state]="filters$ | async" (changed)="onFiltersChanged($event)"></app-workers-filters>
-  <app-workers-table [workers]="list$ | async" [filters]="filters$ | async" (removedEmployee)="onRemovedEmployee($event)"></app-workers-table>
+  <app-workers-table [workers]="list$ | async" [filters]="filters$ | async" (editedEmployee)="onEditEmployee($event)" (removedEmployee)="onRemovedEmployee($event)"></app-workers-table>
 </div>
