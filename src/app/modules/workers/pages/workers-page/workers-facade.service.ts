@@ -23,24 +23,32 @@ export class WorkersFacadeService {
   public add(employee: Employee): void {
     this.workersClient.post(employee).subscribe(worker => {
       this.workersService.add(worker);
+    }, _ => {
+      alert('Dodanie pracownika nie powiodło się, sprawdź połączenie z Internetem.');
     });
   }
 
   public loadWorkers(): void {
     this.workersClient.get().subscribe(workers => {
       this.workersService.initialize(workers);
+    }, _ => {
+      alert('Wczytanie listy pracowników nie powiodło się, sprawdź połączenie z Internetem.');
     });
   }
 
   public edit(employeeId: number, employee: Employee): void {
     this.workersClient.put(employeeId, employee).subscribe(worker => {
       this.workersService.edit(employeeId, worker);
+    }, _ => {
+      alert('Edycja pracownika nie powiodło się, sprawdź połączenie z Internetem.');
     });
   }
 
   public delete(worker: EmployeeEntity): void {
     this.workersClient.delete(worker.id).subscribe(_ => {
       this.workersService.delete(worker.id);
+    }, _ => {
+      alert('Usunięcie użytkownika nie powiodło się, sprawdź połączenie z Internetem.');
     });
   }
 }
