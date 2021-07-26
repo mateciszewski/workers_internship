@@ -24,9 +24,22 @@ export class WorkersFacadeService {
   }
 
   addWorker(worker: Employee) {
-    this.workersClient.post(worker).subscribe(() => {
-      this.workersService.add(worker);
-    });
+    const parsedWorker = this.getTruthyValues(worker);
+    if (this.isValidWorker(parsedWorker)) {
+      this.workersClient.post(worker).subscribe((createdWorker) => {
+        this.workersService.add(createdWorker);
+      });
+    }
+  }
+
+  updateWorker(worker: Employee) {
+      this.workersClient.put(worker).subscribe(() => {
+        this.workersService.update(worker);
+      });
+  }
+
+  isValidWorker(worker: Partial<Employee>) {
+    return Object.keys(worker).length > 0;
   }
 
   removeWorker(worker: Employee) {
@@ -35,10 +48,15 @@ export class WorkersFacadeService {
     });
   }
 
-  parseFilterState(filtersState: EmployeeFiltersState) {
-    const entries = Object.entries(filtersState).filter(
+  getTruthyValues(data: Employee | EmployeeFiltersState | null | undefined) {
+    if (data === null || data === undefined) {
+      return {};
+    }
+
+    const entries = Object.entries(data).filter(
       ([, value]) => value !== undefined && value !== null && value !== '',
     );
+
     return Object.fromEntries(entries);
   }
 

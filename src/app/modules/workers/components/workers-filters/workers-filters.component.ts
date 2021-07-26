@@ -23,5 +23,10 @@ export class WorkersFiltersComponent implements OnInit {
     this.form.valueChanges.subscribe((value) => {
       this.changed.emit(value);
     });
+    this.form.setValue({
+      name: this.state.name || '',
+      age: this.state.age || null,
+      city: this.state.city || '',
+    });
   }
 }

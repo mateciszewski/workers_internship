@@ -1,4 +1,4 @@
-<form [formGroup]="addform" class="workers-filters" fxLayout="column" (ngSubmit)="onSubmit()">
+<form [formGroup]="workerForm" class="workers-filters" fxLayout="column">
   <mat-form-field fyFlex="20%">
     <mat-label>Name</mat-label>
     <input matInput type="text" formControlName="name" />
@@ -15,5 +15,13 @@
     <mat-label>City</mat-label>
     <input matInput type="text" formControlName="city" />
   </mat-form-field>
-  <button mat-raised-button [mat-dialog-close]="addform" type="submit">Dodaj!</button>
+  <button
+    mat-raised-button
+    [mat-dialog-close]="workerForm"
+    [disabled]="workerForm.invalid"
+    type="submit"
+    (click)="onClick()"
+  >
+    {{ buttonText }}
+  </button>
 </form>

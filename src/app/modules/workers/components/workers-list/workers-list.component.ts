@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import type { Employee } from '../../../../core/models/employee';
 
 @Component({
@@ -9,4 +9,14 @@ import type { Employee } from '../../../../core/models/employee';
 })
 export class WorkersListComponent {
   @Input() workers: Employee[];
+  @Output() editedEmployee = new EventEmitter<Employee>();
+  @Output() removedEmployee = new EventEmitter<Employee>();
+
+  public onEmployeeRemove(worker: Employee) {
+    this.removedEmployee.emit(worker);
+  }
+
+  public onEmployeeEdit(worker: Employee) {
+    this.editedEmployee.emit(worker);
+  }
 }

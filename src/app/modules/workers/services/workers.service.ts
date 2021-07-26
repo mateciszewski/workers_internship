@@ -62,6 +62,16 @@ export class WorkersService {
     this.workers$.next(workers);
   }
 
+  public update(updatedWorker: Employee) {
+    const updatedWorkerList = this.workers$.value.map((worker) => {
+      if (worker.id === updatedWorker.id) {
+        return updatedWorker;
+      }
+      return worker;
+    });
+    this.workers$.next(updatedWorkerList);
+  }
+
   public setFilters(filter: Partial<Employee> = {}) {
     this.filtersSubject$.next(filter);
   }

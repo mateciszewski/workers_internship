@@ -6,7 +6,8 @@ import type { Employee } from '../../../core/models/employee';
   providedIn: 'root',
 })
 export class WorkersClientService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+  }
 
   get() {
     return this.httpClient.get<Employee[]>('http://localhost:3000/workers');
@@ -18,5 +19,9 @@ export class WorkersClientService {
 
   delete(worker: Employee) {
     return this.httpClient.delete<Employee>('http://localhost:3000/workers/' + worker.id);
+  }
+
+  put(worker: Employee) {
+    return this.httpClient.put<Employee>('http://localhost:3000/workers/' + worker.id, worker);
   }
 }

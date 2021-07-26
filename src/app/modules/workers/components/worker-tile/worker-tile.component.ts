@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import type { Employee } from '../../../../core/models/employee';
-import type { WorkersFacadeService } from '../../pages/workers-page/workers-facade.service';
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
+import type { Employee } from 'src/app/core/models/employee';
 
 @Component({
   selector: 'app-worker-tile',
@@ -10,10 +9,14 @@ import type { WorkersFacadeService } from '../../pages/workers-page/workers-faca
 })
 export class WorkerTileComponent {
   @Input() worker: Employee;
+  @Output() editedEmployee = new EventEmitter<Employee>();
+  @Output() removedEmployee = new EventEmitter<Employee>();
 
-  constructor(private fasadeService: WorkersFacadeService) {}
+  onEmployeeRemove(worker: Employee) {
+    this.removedEmployee.emit(worker);
+  }
 
-  removeEmployee(worker: Employee) {
-    this.fasadeService.removeWorker(worker);
+  onEmployeeEdit(worker: Employee) {
+    this.editedEmployee.emit(worker);
   }
 }

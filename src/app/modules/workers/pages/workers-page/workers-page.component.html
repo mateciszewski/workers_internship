@@ -4,6 +4,10 @@
     (changed)="onFiltersChanged($event)"
     class="filters"
   ></app-workers-filters>
-  <app-worker-add-button></app-worker-add-button>
-  <app-workers-list [workers]="list$ | async"></app-workers-list>
+  <button mat-raised-button (click)="onAddWorkerButtonClick()">Dodaj</button>
+  <app-workers-list
+    [workers]="list$ | async"
+    (editedEmployee)="onEmployeeEdit($event)"
+    (removedEmployee)="onEmployeeRemove($event)"
+  ></app-workers-list>
 </div>
