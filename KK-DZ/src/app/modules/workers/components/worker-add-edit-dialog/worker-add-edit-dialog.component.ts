@@ -12,9 +12,9 @@ import { EMPLOYEE_ORIGIN } from "src/app/core/models/employee-origin";
 })
 
 export class WorkerAddEditDialogComponent{
-    public titleText: string;
     public addForm: FormGroup;
-    public buttonText: string;
+    public titleText: string = "Dodawanie";
+    public buttonText: string = "Dodaj";
 
     constructor(
         public dialogRef: MatDialogRef<WorkerAddEditDialogComponent>, 
@@ -23,8 +23,10 @@ export class WorkerAddEditDialogComponent{
     ) {
         const worker = this.data || EMPLOYEE_ORIGIN;
 
-        this.titleText = this.data === null ? 'Dodawanie' : `Edytowanie ${worker.name}`;
-        this.buttonText = this.data === null ? 'Dodaj' : 'Edytuj';
+        if(this.data !== null) {
+            this.titleText = `Edytowanie ${worker.name}`;
+            this.buttonText = 'Edytuj';
+        }
 
         this.addForm = this.formBuilder.group({
             name: new FormControl(worker.name, [Validators.required]),

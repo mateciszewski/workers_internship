@@ -9,7 +9,7 @@ import { WorkersFacadeService } from './workers-facade.service';
 import { EMPLOYEE_ORIGIN } from 'src/app/core/models/employee-origin';
 import { WorkerAddEditDialogComponent } from "../../components/worker-add-edit-dialog/worker-add-edit-dialog.component";
 import { EmployeeEntity } from 'src/app/core/models/employee-entity';
-import { DeleteConfirmationDialogComponent } from '../../components/delete-confirmation-dialog/delete-confirmation-dialog';
+import { DeleteConfirmationDialogComponent } from '../../components/delete-confirmation-dialog/delete-confirmation-dialog.component';
 
 @Component({
   selector: 'app-workers-page',
