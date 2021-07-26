@@ -1,5 +1,10 @@
-<div *ngIf="worker" class="worker">
-  <div>Name: {{worker.name}}</div>
-  <div>City: {{worker.city}}</div>
-  <div>Age: {{worker.age}}</div>
-</div>
+<mat-card class="container">
+  <div *ngIf="worker">
+    <mat-card-title>{{ worker.name }} </mat-card-title>
+    <mat-card-content>
+      <div>City: {{ worker.city }}</div>
+      <div>Age: {{ worker.age }}</div>
+      <app-edit-worker [worker]="this.worker"></app-edit-worker>
+    </mat-card-content>
+  </div>
+</mat-card>

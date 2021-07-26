@@ -1,7 +1,7 @@
 export interface Employee {
   [key: string]: any;
   name: string;
-  isWorking: boolean;
+  isWorking?: boolean;
   age: number;
   city: string;
 }

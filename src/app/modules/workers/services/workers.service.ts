@@ -1,29 +1,37 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {Employee} from '../../../core/models/employee';
-import {EmployeeFiltersState} from '../../../core/models/employee-filters-state';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import type { Employee } from '../../../core/models/employee';
+import { EmployeeFiltersState } from '../../../core/models/employee-filters-state';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WorkersService {
   private workers$: BehaviorSubject<Employee[]>;
-  private filtersSubject$: BehaviorSubject<EmployeeFiltersState> = new BehaviorSubject({});
+  private filtersSubject$: BehaviorSubject<EmployeeFiltersState> =
+    new BehaviorSubject({});
 
   public list$: Observable<Employee[]>;
-  public filters$ = this.filtersSubject$.asObservable()
-    .pipe(map(filters => Object.keys(filters).reduce((acc, key) => ({
-      ...acc,
-      ...(!!filters[key] ? {[key]: filters[key]} : {})
-    }), {})));
+  public filters$ = this.filtersSubject$.asObservable().pipe(
+    map((filters) =>
+      Object.keys(filters).reduce(
+        (acc, key) => ({
+          ...acc,
+          ...(!!filters[key] ? { [key]: filters[key] } : {}),
+        }),
+        {}
+      )
+    )
+  );
 
   constructor() {
     this.workers$ = new BehaviorSubject([]);
 
     this.list$ = combineLatest([this.workers$, this.filters$]).pipe(
       map(([workers, filters]) =>
-        workers.filter((worker: Employee) => this.checkWorkerIsValid(worker, filters)
+        workers.filter((worker: Employee) =>
+          this.checkWorkerIsValid(worker, filters)
         )
       )
     );
@@ -34,7 +42,8 @@ export class WorkersService {
     filters: Partial<Employee>
   ): boolean {
     return Object.keys(filters).every(
-      (key: string) => `${filters[key]}`.toLowerCase() === `${worker[key]}`.toLowerCase()
+      (key: string) =>
+        `${filters[key]}`.toLowerCase() === `${worker[key]}`.toLowerCase()
     );
   }
 
@@ -44,6 +53,15 @@ export class WorkersService {
 
   public add(worker: Employee): void {
     this.workers$.next([...this.workers$.value, worker]);
+  }
+
+  public edit(id: number, worker: Employee): void {
+    const index = this.workers$.value.findIndex(
+      (worker: Employee) => worker.id === id
+    );
+    let editedWorkers = this.workers$.value;
+    editedWorkers[index] = worker;
+    this.workers$.next(editedWorkers);
   }
 
   public setFilters(filter: Partial<Employee> = {}): void {

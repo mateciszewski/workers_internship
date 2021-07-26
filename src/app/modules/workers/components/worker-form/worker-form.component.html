@@ -1,6 +1,5 @@
 <div class="container">
-  <div class="caption">filter:</div>
-  <form [formGroup]="form" class="workers-filters" fxLayout="row">
+  <form [formGroup]="form" class="workers-filters" fxLayout="column">
     <mat-form-field fxFlex="45%">
       <mat-label>Name</mat-label>
       <input matInput type="text" formControlName="name" />
@@ -14,4 +13,8 @@
       <input matInput type="text" formControlName="city" />
     </mat-form-field>
   </form>
+  <div class="buttons-container">
+    <button mat-raised-button (click)="close()">close</button>
+    <button mat-raised-button (click)="onSubmit()">submit</button>
+  </div>
 </div>
