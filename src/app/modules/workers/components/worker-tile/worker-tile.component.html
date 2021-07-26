@@ -1,11 +1,10 @@
 <div *ngIf="worker" class="worker">
   <mat-card class="card">
-    <mat-card-content>
+      <img class="user-image" mat-card-avatar src="/assets/user-image-def.png" />
       <mat-card-title>{{ worker.name }}</mat-card-title>
       <mat-card-subtitle>{{ !!worker.isWorking ? 'Zatrudniony' : 'Bezrobotny' }}</mat-card-subtitle>
       <mat-card-subtitle>{{ worker.age }}</mat-card-subtitle>
       <mat-card-subtitle>{{ worker.city }}</mat-card-subtitle>
-    </mat-card-content>
     <mat-card-actions>
       <button mat-stroked-button color="warn" (click)="onEmployeeRemove(worker)">Usuń</button>
       <button mat-button (click)="onEmployeeEdit(worker)">Edytuj</button>

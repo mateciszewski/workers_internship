@@ -20,13 +20,15 @@ export class WorkersFiltersComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.form.valueChanges.subscribe((value) => {
+    this.form.valueChanges.subscribe((value: EmployeeFiltersState) => {
       this.changed.emit(value);
     });
+
+    const { name, age, city } = this.state;
     this.form.setValue({
-      name: this.state.name || '',
-      age: this.state.age || null,
-      city: this.state.city || '',
+      name: name || '',
+      age: age || null,
+      city: city || '',
     });
   }
 }

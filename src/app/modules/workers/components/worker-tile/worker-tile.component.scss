@@ -3,6 +3,14 @@
   flex-direction: column;
   text-align: center;
   margin: 10px;
-  height: 170px;
-  width: 250px;
+  box-shadow: 1px 5px 5px rgba(0,0,0,0.3);
+  width: 200px;
+}
+
+.user-image{
+  display: flex;
+  align-self: center;
+  width: 7rem;
+  height: 7rem;
+  margin-bottom: 2em;
 }
