@@ -7,27 +7,22 @@ import type { Employee } from '../../../core/models/employee';
   providedIn: 'root',
 })
 export class WorkersClientService {
+  CLIENT_URL: string = 'http://localhost:3000/workers/';
   constructor(private httpClient: HttpClient) {}
 
   get(): Observable<Employee[]> {
-    return this.httpClient.get<Employee[]>('http://localhost:3000/workers');
+    return this.httpClient.get<Employee[]>(this.CLIENT_URL);
   }
 
   add(Employee: Employee): Observable<Employee> {
-    return this.httpClient.post<Employee>(
-      'http://localhost:3000/workers',
-      Employee
-    );
+    return this.httpClient.post<Employee>(this.CLIENT_URL, Employee);
   }
 
   edit(id: number, Employee: Employee) {
-    return this.httpClient.put<Employee>(
-      'http://localhost:3000/workers/' + id,
-      Employee
-    );
+    return this.httpClient.put<Employee>(this.CLIENT_URL + id, Employee);
   }
 
   delete(id: number) {
-    this.httpClient.delete<Employee>('http://localhost:3000/workers/' + id);
+    this.httpClient.delete<Employee>(this.CLIENT_URL + id);
   }
 }
