@@ -1,6 +1,6 @@
 import { Employee } from "./employee";
 
-export const EmployeeOrigin: Employee = {
+export const EMPLOYEE_ORIGIN: Employee = {
     name: null,
     isWorking: null,
     age: null,

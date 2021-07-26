@@ -22,7 +22,7 @@ export class WorkersFacadeService {
 
   public add(employee: Employee): void {
     this.workersClient.post(employee).subscribe(worker => {
-      this.workersService.add(worker);
+      this.loadWorkers();
     }, _ => {
       alert('Dodanie pracownika nie powiodło się, sprawdź połączenie z Internetem.');
     });
@@ -38,7 +38,7 @@ export class WorkersFacadeService {
 
   public edit(employeeId: number, employee: Employee): void {
     this.workersClient.put(employeeId, employee).subscribe(worker => {
-      this.workersService.edit(employeeId, worker);
+      this.loadWorkers();
     }, _ => {
       alert('Edycja pracownika nie powiodło się, sprawdź połączenie z Internetem.');
     });
@@ -46,7 +46,7 @@ export class WorkersFacadeService {
 
   public delete(worker: EmployeeEntity): void {
     this.workersClient.delete(worker.id).subscribe(_ => {
-      this.workersService.delete(worker.id);
+      this.loadWorkers();
     }, _ => {
       alert('Usunięcie użytkownika nie powiodło się, sprawdź połączenie z Internetem.');
     });

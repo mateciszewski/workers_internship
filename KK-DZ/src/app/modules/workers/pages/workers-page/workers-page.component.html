@@ -8,5 +8,5 @@
 
 <div class="workers-page">
   <app-workers-filters [state]="filters$ | async" (changed)="onFiltersChanged($event)"></app-workers-filters>
-  <app-workers-table [workers]="list$ | async" [filters]="filters$ | async" (editedEmployee)="onEditEmployee($event)" (removedEmployee)="onRemovedEmployee($event)"></app-workers-table>
+  <app-workers-table [workers]="list$ | async" [filters]="filters$ | async" (employeeEdited)="onEditEmployee($event)" (employeeRemoved)="onRemovedEmployee($event)"></app-workers-table>
 </div>

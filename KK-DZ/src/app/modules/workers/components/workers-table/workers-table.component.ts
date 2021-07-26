@@ -14,8 +14,8 @@ export class WorkersTableComponent implements OnChanges {
   @Input() workers: EmployeeEntity[];
   @Input() filters: EmployeeFiltersState;
 
-  @Output() removedEmployee = new EventEmitter<EmployeeEntity>();
-  @Output() editedEmployee = new EventEmitter<EmployeeEntity>();
+  @Output() employeeRemoved = new EventEmitter<EmployeeEntity>();
+  @Output() employeeEdited = new EventEmitter<EmployeeEntity>();
 
   public emptyMessage: string;
 
@@ -26,10 +26,10 @@ export class WorkersTableComponent implements OnChanges {
   }
 
   public onEditWorkerClick(worker: EmployeeEntity): void {
-    this.editedEmployee.emit(worker);
+    this.employeeEdited.emit(worker);
   }
 
   public onDeleteWorkerClick(worker: EmployeeEntity): void {
-    this.removedEmployee.emit(worker);
+    this.employeeRemoved.emit(worker);
   }
 }

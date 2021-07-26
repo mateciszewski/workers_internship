@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatDialog } from "@angular/material/dialog";
 
 import { map, distinctUntilChanged } from 'rxjs/operators';
 
 import { EmployeeFiltersState } from '../../../../core/models/employee-filters-state';
 import { WorkersFacadeService } from './workers-facade.service';
-import { EmployeeOrigin } from 'src/app/core/models/employee-origin';
+import { EMPLOYEE_ORIGIN } from 'src/app/core/models/employee-origin';
 import { WorkerAddEditDialogComponent } from "../../components/worker-add-edit-dialog/worker-add-edit-dialog.component";
 import { EmployeeEntity } from 'src/app/core/models/employee-entity';
-import { DeleteConfirmationDialog } from '../../components/delete-confirmation-dialog/delete-confirmation-dialog';
+import { DeleteConfirmationDialogComponent } from '../../components/delete-confirmation-dialog/delete-confirmation-dialog';
 
 @Component({
   selector: 'app-workers-page',
   templateUrl: './workers-page.component.html',
-  styleUrls: ['./workers-page.component.scss']
+  styleUrls: ['./workers-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkersPageComponent implements OnInit {
   public list$ = this.workersFacade.list$;
@@ -24,11 +25,9 @@ export class WorkersPageComponent implements OnInit {
 
   public ngOnInit(): void {
     this.route.queryParams.pipe(
-      map((params) => Object.keys(params).reduce((acc, key) => {
-        return {...acc, ...(this.checkKeyInEmployeeEntity(key) ? {[key]: params[key]} : {})}
-      }, {}),
+      map((params) => this.mapToFiltersValue(params)),
       distinctUntilChanged()
-    )).subscribe((filters) => {
+    ).subscribe((filters) => {
       this.workersFacade.setFilters(filters);
     });
 
@@ -54,7 +53,7 @@ export class WorkersPageComponent implements OnInit {
   }
 
   public onRemovedEmployee(worker: EmployeeEntity): void {
-    const dialogRef = this.matDialog.open(DeleteConfirmationDialog, {
+    const dialogRef = this.matDialog.open(DeleteConfirmationDialogComponent, {
       width: '400px',
       data: worker
     });
@@ -75,7 +74,13 @@ export class WorkersPageComponent implements OnInit {
     });
   }
 
+  private mapToFiltersValue(params: Params): EmployeeFiltersState {
+    return Object.keys(params).reduce((acc, key) => {
+      return {...acc, ...(this.checkKeyInEmployeeEntity(key) ? {[key]: params[key]} : {})}
+    }, {})
+  }
+
   private checkKeyInEmployeeEntity(key: string): boolean {
-    return Object.keys(EmployeeOrigin).includes(key);
+    return Object.keys(EMPLOYEE_ORIGIN).includes(key);
   }
 }
