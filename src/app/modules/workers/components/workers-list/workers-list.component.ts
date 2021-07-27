@@ -10,3 +10,5 @@ import {Employee} from '../../../../core/models/employee';
 export class WorkersListComponent {
   @Input() workers: Employee[];
 }
+
+

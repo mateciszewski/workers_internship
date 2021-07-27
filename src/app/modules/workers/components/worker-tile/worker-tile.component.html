@@ -2,4 +2,6 @@
   <div>Name: {{worker.name}}</div>
   <div>City: {{worker.city}}</div>
   <div>Age: {{worker.age}}</div>
+  <div>Is working?: {{worker.isWorking? "Yes" : "No"}}</div>
+  <button class="delete" (click)="deleteWorker(worker.id)">Delete worker</button>
 </div>

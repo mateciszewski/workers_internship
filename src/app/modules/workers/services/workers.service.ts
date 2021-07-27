@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {Employee} from '../../../core/models/employee';
-import {EmployeeFiltersState} from '../../../core/models/employee-filters-state';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Employee } from '../../../core/models/employee';
+import { EmployeeFiltersState } from '../../../core/models/employee-filters-state';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class WorkersService {
   public filters$ = this.filtersSubject$.asObservable()
     .pipe(map(filters => Object.keys(filters).reduce((acc, key) => ({
       ...acc,
-      ...(!!filters[key] ? {[key]: filters[key]} : {})
+      ...(!!filters[key] ? { [key]: filters[key] } : {})
     }), {})));
 
   constructor() {
@@ -48,5 +48,8 @@ export class WorkersService {
 
   public setFilters(filter: Partial<Employee> = {}): void {
     this.filtersSubject$.next(filter);
+  }
+  public resetFilters(){
+    this.setFilters({});
   }
 }
