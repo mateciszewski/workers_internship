@@ -6,7 +6,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { EmployeeFiltersState } from '../../../../core/models/employee-filters-state';
+import type { EmployeeFiltersState } from '../../../../core/models/employee-filters-state';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -26,9 +26,10 @@ export class WorkersFiltersComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.form.valueChanges.subscribe((value) => {
+    this.form.valueChanges.subscribe((value: EmployeeFiltersState) => {
       this.changed.emit(value);
     });
+
     this.form.setValue({
       name: this.state.name || '',
       age: this.state.age || null,
