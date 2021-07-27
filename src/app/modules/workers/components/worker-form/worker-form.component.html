@@ -1,17 +1,21 @@
 <div class="container">
-  <div class="caption">filters:</div>
-  <form [formGroup]="form" class="workers-filters" fxLayout="row">
+  <form [formGroup]="form" class="workers-filters" fxLayout="column">
     <mat-form-field fxFlex="45%">
       <mat-label>Name</mat-label>
       <input matInput type="text" formControlName="name" />
     </mat-form-field>
+    <mat-checkbox formControlName="isWorking">isWorking</mat-checkbox>
     <mat-form-field fxFlex="10%" fxFlexOffset="5%">
       <mat-label>Age</mat-label>
       <input matInput type="number" formControlName="age" />
     </mat-form-field>
-    <mat-form-field fxFlex="45%" fxFlexOffset="5%">
+    <mat-form-field fxFlex="40%" fxFlexOffset="5%">
       <mat-label>City</mat-label>
       <input matInput type="text" formControlName="city" />
     </mat-form-field>
   </form>
+  <div class="buttons-container">
+    <button mat-raised-button (click)="close()">close</button>
+    <button mat-raised-button (click)="onSubmit()">submit</button>
+  </div>
 </div>

@@ -1,0 +1,10 @@
+{
+  "workers": [
+    {
+      "name": "Jan",
+      "age": null,
+      "city": "Warszawa",
+      "id": 1
+    }
+  ]
+}

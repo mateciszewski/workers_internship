@@ -1,5 +1,24 @@
-.worker {
+.container {
+  min-width: 150px;
+  margin-left: 20px;
+  margin-top: 15px;
+  animation: fadein 1s;
+}
+
+.title {
   display: flex;
-  flex-direction: column;
-  width: 250px;
+}
+
+.icon {
+  margin-left: 6px;
+  font-size: 22px;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

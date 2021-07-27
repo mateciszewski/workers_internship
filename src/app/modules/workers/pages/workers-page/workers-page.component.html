@@ -1,4 +1,8 @@
 <div class="workers-page">
-  <app-workers-filters [state]="filters$ | async" (changed)="onFiltersChanged($event)"></app-workers-filters>
+  <app-workers-filters
+    [state]="filters$ | async"
+    (changed)="onFiltersChanged($event)"
+  ></app-workers-filters>
   <app-workers-list [workers]="list$ | async"></app-workers-list>
+  <app-add-worker (worker)="onSubmitNewWorker($event)"></app-add-worker>
 </div>
