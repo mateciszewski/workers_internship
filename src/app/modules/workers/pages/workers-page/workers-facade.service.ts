@@ -1,7 +1,8 @@
-import {Injectable} from '@angular/core';
-import {EmployeeFiltersState} from '../../../../core/models/employee-filters-state';
-import {WorkersService} from '../../services/workers.service';
-import {WorkersClientService} from '../../clients/workers-client.service';
+import { WorkersFiltersComponent } from './../../components/workers-filters/workers-filters.component';
+import { Injectable } from '@angular/core';
+import { EmployeeFiltersState } from '../../../../core/models/employee-filters-state';
+import { WorkersService } from '../../services/workers.service';
+import { WorkersClientService } from '../../clients/workers-client.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class WorkersFacadeService {
   }
 
   setFilters(filtersState: EmployeeFiltersState) {
-    debugger
+    //debugger
     this.workersService.setFilters(filtersState);
   }
 }

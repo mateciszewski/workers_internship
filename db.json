@@ -1,0 +1,35 @@
+{
+  "workers": [
+    {
+      "city": "Mragowo",
+      "name": "Blazej",
+      "age": 23,
+      "isWorking": true,
+      "id": 2
+    },
+    {
+      "name": "Patryk",
+      "isWorking": false,
+      "age": 30,
+      "city": "Olsztyn"
+    },
+    {
+      "name": "Dawid",
+      "isWorking": true,
+      "age": 22,
+      "city": "Olsztyn"
+    },
+    {
+      "name": "Kamil",
+      "isWorking": true,
+      "age": 24,
+      "city": "Poznan"
+    },
+    {
+      "name": "Konrad",
+      "isWorking": true,
+      "age": 22,
+      "city": "Olsztyn"
+    }
+  ]
+}
