@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { EmployeeEntity } from '../../../../core/models/employee-entity';
 import { EmployeeFiltersState } from 'src/app/core/models/employee-filters-state';
 
@@ -6,10 +12,16 @@ import { EmployeeFiltersState } from 'src/app/core/models/employee-filters-state
   selector: 'app-workers-table',
   templateUrl: './workers-table.component.html',
   styleUrls: ['./workers-table.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorkersTableComponent {
-  public displayedColumns: string[] = ['name', 'age', 'city', 'isWorking', 'actions'];
+  public displayedColumns: string[] = [
+    'name',
+    'age',
+    'city',
+    'isWorking',
+    'actions',
+  ];
 
   @Input() workers: EmployeeEntity[];
   @Input() filters: EmployeeFiltersState;

@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name: 'isWorkingText'
+  name: 'isWorkingText',
 })
 export class IsWorkingText implements PipeTransform {
   transform(isWorking: boolean): string {

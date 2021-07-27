@@ -49,6 +49,6 @@ const MATERIAL_MODULES = [
     FlexModule,
     ...MATERIAL_MODULES,
     WorkersPipesModules,
-  ]
+  ],
 })
-export class WorkersModule { }
+export class WorkersModule {}

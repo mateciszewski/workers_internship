@@ -1,34 +1,56 @@
-<mat-table class="workers-table mat-elevation-z8" [dataSource]="workers" *ngIf="workers.length !== 0">
+<mat-table
+  class="workers-table mat-elevation-z8"
+  [dataSource]="workers"
+  *ngIf="workers.length !== 0"
+>
   <ng-container matColumnDef="name">
     <mat-header-cell *matHeaderCellDef>Nazwa</mat-header-cell>
     <mat-cell *matCellDef="let worker">{{ worker.name }}</mat-cell>
   </ng-container>
-  
+
   <ng-container matColumnDef="age">
     <mat-header-cell *matHeaderCellDef>Wiek</mat-header-cell>
     <mat-cell *matCellDef="let worker">{{ worker.age }}</mat-cell>
   </ng-container>
-  
+
   <ng-container matColumnDef="city">
     <mat-header-cell *matHeaderCellDef>Miasto</mat-header-cell>
     <mat-cell *matCellDef="let worker">{{ worker.city }}</mat-cell>
   </ng-container>
-  
+
   <ng-container matColumnDef="isWorking">
     <mat-header-cell *matHeaderCellDef>Status pracy</mat-header-cell>
-    <mat-cell *matCellDef="let worker">{{ worker.isWorking | isWorkingText }}</mat-cell>
+    <mat-cell *matCellDef="let worker">{{
+      worker.isWorking | isWorkingText
+    }}</mat-cell>
   </ng-container>
-  
+
   <ng-container matColumnDef="actions">
-    <mat-header-cell class="actions-header-cell" *matHeaderCellDef>Akcje</mat-header-cell>
+    <mat-header-cell class="actions-header-cell" *matHeaderCellDef
+      >Akcje</mat-header-cell
+    >
     <mat-cell class="actions-cell" *matCellDef="let worker">
-      <mat-icon class="action" (click)="onEditWorkerClick(worker)" matTooltip="Edytuj tego pracownika" matTooltipPosition="right">edit</mat-icon>
-      <mat-icon class="action" (click)="onDeleteWorkerClick(worker)" matTooltip="Usuń tego pracownika" matTooltipPosition="right">delete</mat-icon>
+      <mat-icon
+        class="action"
+        (click)="onEditWorkerClick(worker)"
+        matTooltip="Edytuj tego pracownika"
+        matTooltipPosition="right"
+        >edit</mat-icon
+      >
+      <mat-icon
+        class="action"
+        (click)="onDeleteWorkerClick(worker)"
+        matTooltip="Usuń tego pracownika"
+        matTooltipPosition="right"
+        >delete</mat-icon
+      >
     </mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 </mat-table>
 
-<div class="empty-workers-table" *ngIf="workers.length === 0">{{ filters | emptyTableText }}</div>
+<div class="empty-workers-table" *ngIf="workers.length === 0">
+  {{ filters | emptyTableText }}
+</div>

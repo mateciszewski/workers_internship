@@ -5,10 +5,8 @@ import { EmployeeEntity } from 'src/app/core/models/employee-entity';
 @Component({
   selector: 'app-delete-confirmation-dialog',
   templateUrl: 'delete-confirmation-dialog.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteConfirmationDialogComponent {
-  constructor(
-      @Inject(MAT_DIALOG_DATA) public worker: EmployeeEntity
-  ) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public worker: EmployeeEntity) {}
 }

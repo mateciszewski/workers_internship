@@ -1,6 +1,6 @@
 {
-    "/employees": {
-        "target": "http://localhost:3000",
-        "secure": false
-    }
+  "/employees": {
+    "target": "http://localhost:3000",
+    "secure": false
+  }
 }
