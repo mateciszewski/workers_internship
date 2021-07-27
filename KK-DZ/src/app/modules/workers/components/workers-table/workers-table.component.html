@@ -16,7 +16,7 @@
   
   <ng-container matColumnDef="isWorking">
     <mat-header-cell *matHeaderCellDef>Status pracy</mat-header-cell>
-    <mat-cell *matCellDef="let worker">{{ worker | isWorkingText }}</mat-cell>
+    <mat-cell *matCellDef="let worker">{{ worker.isWorking | isWorkingText }}</mat-cell>
   </ng-container>
   
   <ng-container matColumnDef="actions">

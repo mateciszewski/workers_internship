@@ -23,7 +23,12 @@ export class WorkersPageComponent implements OnInit {
   public autoCompleteNames$ = this.workersFacade.autoCompleteNames$;
   public autoCompleteCities$ = this.workersFacade.autoCompleteCities$;
 
-  constructor(private workersFacade: WorkersFacadeService, private router: Router, private route: ActivatedRoute, private matDialog: MatDialog) { }
+  constructor(
+    private workersFacade: WorkersFacadeService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private matDialog: MatDialog
+  ) { }
 
   public ngOnInit(): void {
     this.route.queryParams.pipe(

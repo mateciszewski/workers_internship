@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 
 import { EmployeeFiltersState } from 'src/app/core/models/employee-filters-state';
 
 import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-workers-filters',
@@ -13,7 +13,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./workers-filters.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WorkersFiltersComponent implements OnInit, OnDestroy {
+export class WorkersFiltersComponent implements OnInit, OnChanges, OnDestroy {
   @Input() state: EmployeeFiltersState;
   @Output() changed = new EventEmitter<EmployeeFiltersState>();
 
@@ -23,20 +23,39 @@ export class WorkersFiltersComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   private subscriptionFormValueChanges: Subscription;
 
-  public ngOnInit(): void {
-    this.form = new FormGroup({
-      name: new FormControl(this.state.name),
-      age: new FormControl(this.state.age, [Validators.pattern('^[0-9]+$'), Validators.min(15), Validators.max(200)]),
-      city: new FormControl(this.state.city),
-      isWorking: new FormControl(["true", "false"].includes(String(this.state.isWorking)) ? Boolean(this.state.isWorking) : null)
+  constructor(private formBuilder: FormBuilder) {
+    this.form = this.formBuilder.group({
+      name: [],
+      age: [, [Validators.pattern('^[0-9]+$'), Validators.min(15), Validators.max(200)]],
+      city: [],
+      isWorking: []
     });
+  }
 
-    this.subscriptionFormValueChanges = this.form.valueChanges.pipe(debounceTime(100), distinctUntilChanged()).subscribe(value => {
+  public ngOnInit(): void {
+    this.subscriptionFormValueChanges = this.form.valueChanges.pipe(
+      debounceTime(100),
+      distinctUntilChanged()
+    ).subscribe(value => {
       const newValue = Object.keys(value).reduce((acc, key) => {
         return {...acc, [key]: value[key] !== "" ? value[key] : null}
       }, {});
       this.changed.emit(newValue);
     });
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if(changes.state?.currentValue !== changes.state?.previousValue) {
+      this.form.patchValue({
+        name: this.state.name,
+        age: this.transformAgeFormControl(Number(this.state.age)),
+        city: this.state.city,
+        isWorking: this.transformIsWorkingFormControl(String(this.state.isWorking))
+      }, {
+        emitEvent: false,
+        onlySelf: true
+      });
+    }
   }
 
   public ngOnDestroy(): void {
@@ -45,5 +64,13 @@ export class WorkersFiltersComponent implements OnInit, OnDestroy {
 
   public resetFilters(): void {
     this.form.reset();
+  }
+
+  private transformAgeFormControl(input: number): number | null {
+    return !isNaN(input) ? Number(input) : null;
+  }
+
+  private transformIsWorkingFormControl(input: string): boolean | null {
+    return ["true", "false"].includes(input) ? input === "true" : null;
   }
 }

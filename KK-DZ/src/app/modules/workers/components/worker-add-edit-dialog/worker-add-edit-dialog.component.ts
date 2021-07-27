@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Inject } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Employee } from "src/app/core/models/employee";
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EMPLOYEE_ORIGIN } from "src/app/core/models/employee-origin";
@@ -29,10 +29,10 @@ export class WorkerAddEditDialogComponent{
         }
 
         this.addForm = this.formBuilder.group({
-            name: new FormControl(worker.name, [Validators.required]),
-            age: new FormControl(worker.age, [Validators.required, Validators.min(15), Validators.max(200)]),
-            city: new FormControl(worker.city, [Validators.required]),
-            isWorking: new FormControl(worker.isWorking, [Validators.required])
+            name: [worker.name, [Validators.required]],
+            age: [worker.age, [Validators.required, Validators.min(15), Validators.max(200)]],
+            city: [worker.city, [Validators.required]],
+            isWorking: [worker.isWorking, [Validators.required]]
         });
     }
 
