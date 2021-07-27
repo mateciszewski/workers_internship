@@ -5,6 +5,7 @@
       <mat-icon class="icon">person</mat-icon>
     </div>
     <mat-card-content>
+      <div>{{ worker.isWorking ? "employeed" : "unemployeed" }}</div>
       <div>City: {{ worker.city }}</div>
       <div>Age: {{ worker.age }}</div>
       <app-edit-worker [worker]="this.worker"></app-edit-worker>

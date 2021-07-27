@@ -17,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { WorkerFormComponent } from './components/worker-form/worker-form.component';
 import { DeleteWorkerComponent } from './components/delete-worker/delete-worker.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatDialogModule,
     MatIconModule,
+    MatCheckboxModule,
   ],
 })
 export class WorkersModule {}

@@ -19,12 +19,14 @@ export class WorkerFormComponent implements OnInit {
   public form = new FormGroup({
     name: new FormControl(''),
     age: new FormControl(null),
+    isWorking: new FormControl(false),
     city: new FormControl(''),
   });
 
   ngOnInit() {
     this.form.patchValue({
       name: this.data.worker.name,
+      isWorking: this.data.worker.isWorking,
       age: this.data.worker.age,
       city: this.data.worker.city,
     });
