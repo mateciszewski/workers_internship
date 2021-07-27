@@ -1,5 +1,6 @@
 .header{
   display: flex;
+  justify-content: flex-end;
   align-items: center;
   width: 100%;
   height:20%;
@@ -7,8 +8,7 @@
 }
 
 .add-worker-btn{
-  margin-left: 50px;
-  width: 20%;
+  width: 50%;
 }
 .workers-list{
   display: flex;

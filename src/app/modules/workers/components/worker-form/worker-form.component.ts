@@ -22,7 +22,7 @@ export class WorkerFormComponent {
       this.buttonText = 'Edytuj';
     }
 
-    const { name, isWorking, age, city } = data;
+    const { name, isWorking, age, city } = data || {};
 
     this.workerForm = new FormGroup({
       name: new FormControl(name || '', [Validators.required]),

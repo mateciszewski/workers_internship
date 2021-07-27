@@ -43,7 +43,7 @@ export class WorkersPageComponent implements OnInit {
   public onAddWorkerButtonClick() {
     const dialogRef = this.dialog.open(WorkerFormComponent, {
       width: '350px',
-      data: null,
+      data: null
     });
 
     dialogRef.afterClosed().subscribe((newEmployee: Employee) => {
