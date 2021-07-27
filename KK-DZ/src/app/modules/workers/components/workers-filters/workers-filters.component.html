@@ -1,7 +1,10 @@
 <form [formGroup]="form" class="workers-filters" fxLayout="row" fxLayoutAlign="space-around center">
   <mat-form-field fxFlex="auto">
     <mat-label>Nazwa</mat-label>
-    <input matInput type="text" formControlName="name">
+    <input matInput type="text" formControlName="name" [matAutocomplete]="autoName" autocomplete="off">
+    <mat-autocomplete #autoName="matAutocomplete">
+      <mat-option *ngFor="let name of autoCompleteNames" [value]="name">{{ name }}</mat-option>
+    </mat-autocomplete>
   </mat-form-field>
 
   <mat-form-field fxFlex="auto" fxFlexOffset="1">
@@ -11,7 +14,10 @@
 
   <mat-form-field fxFlex="auto" fxFlexOffset="1">
     <mat-label>Miasto</mat-label>
-    <input matInput type="text" formControlName="city">
+    <input matInput type="text" formControlName="city" [matAutocomplete]="autoCity" autocomplete="off">
+    <mat-autocomplete #autoCity="matAutocomplete">
+      <mat-option *ngFor="let city of autoCompleteCities" [value]="city">{{ city }}</mat-option>
+    </mat-autocomplete>
   </mat-form-field>
 
   <mat-form-field fxFlex="auto" fxFlexOffset="1">

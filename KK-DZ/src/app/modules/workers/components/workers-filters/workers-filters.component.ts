@@ -17,6 +17,9 @@ export class WorkersFiltersComponent implements OnInit, OnDestroy {
   @Input() state: EmployeeFiltersState;
   @Output() changed = new EventEmitter<EmployeeFiltersState>();
 
+  @Input() autoCompleteNames: string[];
+  @Input() autoCompleteCities: string[];
+
   public form: FormGroup;
   private subscriptionFormValueChanges: Subscription;
 

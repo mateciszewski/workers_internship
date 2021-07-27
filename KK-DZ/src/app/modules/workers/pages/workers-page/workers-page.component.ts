@@ -20,6 +20,8 @@ import { DeleteConfirmationDialogComponent } from '../../components/delete-confi
 export class WorkersPageComponent implements OnInit {
   public list$ = this.workersFacade.list$;
   public filters$ = this.workersFacade.filters$;
+  public autoCompleteNames$ = this.workersFacade.autoCompleteNames$;
+  public autoCompleteCities$ = this.workersFacade.autoCompleteCities$;
 
   constructor(private workersFacade: WorkersFacadeService, private router: Router, private route: ActivatedRoute, private matDialog: MatDialog) { }
 

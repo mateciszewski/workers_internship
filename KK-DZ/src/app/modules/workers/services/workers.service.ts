@@ -4,7 +4,7 @@ import { EmployeeEntity } from '../../../core/models/employee-entity';
 import { EmployeeFiltersState } from '../../../core/models/employee-filters-state';
 
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, distinctUntilChanged } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,15 +20,20 @@ export class WorkersService {
       ...(!!filters[key] ? {[key]: filters[key]} : {})
     }), {})));
 
+  public autoCompleteNames$: Observable<string[]>;
+  public autoCompleteCities$: Observable<string[]>;
+
   constructor() {
     this.workers$ = new BehaviorSubject([]);
 
     this.list$ = combineLatest([this.workers$, this.filters$]).pipe(
       map(([workers, filters]) =>
-        workers.filter((worker: EmployeeEntity) => this.checkWorkerIsValid(worker, filters)
-        )
+        workers.filter((worker: EmployeeEntity) => this.checkWorkerIsValid(worker, filters))
       )
     );
+
+    this.autoCompleteNames$ = this.autoCompleteValue('name');
+    this.autoCompleteCities$ = this.autoCompleteValue('city');
   }
 
   private checkWorkerIsValid(
@@ -68,5 +73,16 @@ export class WorkersService {
 
   private removeWorkersWithId(workerId: number): EmployeeEntity[] {
     return this.workers$.value.filter(worker => worker.id !== workerId);
+  }
+
+  private autoCompleteValue(key: string): Observable<string[]> {
+    return this.list$.pipe(
+      map((workers: EmployeeEntity[]) => this.uniqueValueFromWorkers(workers, key)),
+      distinctUntilChanged()
+    );
+  }
+
+  private uniqueValueFromWorkers(workers: EmployeeEntity[], key: string): any[] {
+    return [...new Set(workers.map((worker: EmployeeEntity) => worker[key]))];
   }
 }

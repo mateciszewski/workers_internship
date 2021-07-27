@@ -13,6 +13,8 @@ import { EmployeeEntity } from 'src/app/core/models/employee-entity';
 export class WorkersFacadeService {
   public list$ = this.workersService.list$;
   public filters$ = this.workersService.filters$;
+  public autoCompleteNames$ = this.workersService.autoCompleteNames$;
+  public autoCompleteCities$ = this.workersService.autoCompleteCities$;
 
   constructor(private workersService: WorkersService, private workersClient: WorkersClientService) { }
 

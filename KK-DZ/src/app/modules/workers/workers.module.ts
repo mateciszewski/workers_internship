@@ -6,6 +6,7 @@ import { WorkersTableComponent } from './components/workers-table/workers-table.
 import { WorkersFiltersComponent } from './components/workers-filters/workers-filters.component';
 import { DeleteConfirmationDialogComponent } from './components/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { IsWorkingText } from './shared/pipes/is-working-text.pipe';
+import { EmptyTableText } from './shared/pipes/empty-table-text.pipe';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,6 +19,7 @@ import { WorkerAddEditDialogComponent } from './components/worker-add-edit-dialo
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     WorkersFiltersComponent,
     DeleteConfirmationDialogComponent,
     WorkerAddEditDialogComponent,
-    IsWorkingText
+    IsWorkingText,
+    EmptyTableText
   ],
   imports: [
     CommonModule,
@@ -43,6 +46,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatIconModule,
     MatTooltipModule,
     MatToolbarModule,
+    MatAutocompleteModule,
   ]
 })
 export class WorkersModule { }
