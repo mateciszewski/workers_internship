@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import type { Employee } from '../../../core/models/employee';
 
 @Injectable({
@@ -23,6 +23,6 @@ export class WorkersClientService {
   }
 
   delete(id: number) {
-    this.httpClient.delete<Employee>(this.CLIENT_URL + id);
+    return this.httpClient.delete<Employee>(this.CLIENT_URL + id);
   }
 }

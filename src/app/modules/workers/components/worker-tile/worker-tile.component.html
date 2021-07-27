@@ -5,6 +5,7 @@
       <div>City: {{ worker.city }}</div>
       <div>Age: {{ worker.age }}</div>
       <app-edit-worker [worker]="this.worker"></app-edit-worker>
+      <app-delete-worker [id]="this.worker.id"></app-delete-worker>
     </mat-card-content>
   </div>
 </mat-card>

@@ -1,9 +1,9 @@
 {
   "workers": [
     {
-      "name": "Patryk",
-      "age": 22,
-      "city": "Wegorzewo",
+      "name": "Jan",
+      "age": null,
+      "city": "Warszawa",
       "id": 1
     }
   ]

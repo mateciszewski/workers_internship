@@ -34,6 +34,12 @@ export class WorkersFacadeService {
     });
   }
 
+  deleteWorker(id: number) {
+    this.workersClient.delete(id).subscribe(() => {
+      this.workersService.delete(id);
+    });
+  }
+
   setFilters(filtersState: EmployeeFiltersState) {
     this.workersService.setFilters(filtersState);
   }

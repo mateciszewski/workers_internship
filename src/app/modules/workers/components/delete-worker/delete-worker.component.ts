@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { WorkersFacadeService } from '../../pages/workers-page/workers-facade.service';
 
 @Component({
   selector: 'app-delete-worker',
   templateUrl: './delete-worker.component.html',
-  styleUrls: ['./delete-worker.component.scss']
+  styleUrls: ['./delete-worker.component.scss'],
 })
-export class DeleteWorkerComponent implements OnInit {
+export class DeleteWorkerComponent {
+  @Input() id: number;
+  constructor(private workersFacade: WorkersFacadeService) {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  onSubmit() {
+    this.workersFacade.deleteWorker(this.id);
   }
-
 }

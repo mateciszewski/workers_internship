@@ -64,6 +64,13 @@ export class WorkersService {
     this.workers$.next(editedWorkers);
   }
 
+  delete(id: number) {
+    let filteredWorkers = this.workers$.value.filter(
+      (worker: Employee) => worker.id !== id
+    );
+    this.workers$.next(filteredWorkers);
+  }
+
   public setFilters(filter: Partial<Employee> = {}): void {
     this.filtersSubject$.next(filter);
   }
