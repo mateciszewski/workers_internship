@@ -50,7 +50,7 @@ export class WorkersService {
   }
 
   public edit(workerId: number, worker: EmployeeEntity) {
-    let editedWorkers = [...this.workers$.value];
+    const editedWorkers = [...this.workers$.value];
 
     const index = editedWorkers.findIndex(item => item.id === workerId);
     editedWorkers[index] = worker;
