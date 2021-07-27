@@ -4,7 +4,7 @@ import {
   EventEmitter,
   Output,
 } from '@angular/core';
-import type { MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { WorkerFormComponent } from '../worker-form/worker-form.component';
 import type { Employee } from '../../../../core/models/employee';
 

@@ -16,6 +16,7 @@ import { EditWorkerComponent } from './components/edit-worker/edit-worker.compon
 import { MatDialogModule } from '@angular/material/dialog';
 import { WorkerFormComponent } from './components/worker-form/worker-form.component';
 import { DeleteWorkerComponent } from './components/delete-worker/delete-worker.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { DeleteWorkerComponent } from './components/delete-worker/delete-worker.
     MatCardModule,
     MatButtonModule,
     MatDialogModule,
+    MatIconModule,
   ],
 })
 export class WorkersModule {}
