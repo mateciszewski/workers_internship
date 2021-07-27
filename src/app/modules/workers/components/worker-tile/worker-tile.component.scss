@@ -1,5 +1,17 @@
-.worker {
+.card {
   display: flex;
   flex-direction: column;
-  width: 250px;
+  text-align: center;
+  margin: 10px;
+  box-shadow: 1px 5px 5px rgba(0,0,0,0.3);
+  border-radius: 5px;
+  width: 200px;
+}
+
+.user-image{
+  display: flex;
+  align-self: center;
+  width: 7rem;
+  height: 7rem;
+  margin-bottom: 2em;
 }

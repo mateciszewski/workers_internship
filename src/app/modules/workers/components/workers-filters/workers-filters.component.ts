@@ -1,12 +1,13 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {EmployeeFiltersState} from '../../../../core/models/employee-filters-state';
-import {FormControl, FormGroup} from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { EventEmitter, ChangeDetectionStrategy, Component, Input, Output } from '@angular/core';
+import type { OnInit } from '@angular/core';
+import type { EmployeeFiltersState } from 'src/app/core/models/employee-filters-state';
 
 @Component({
   selector: 'app-workers-filters',
   templateUrl: './workers-filters.component.html',
   styleUrls: ['./workers-filters.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorkersFiltersComponent implements OnInit {
   @Input() state: EmployeeFiltersState;
@@ -15,11 +16,19 @@ export class WorkersFiltersComponent implements OnInit {
   public form = new FormGroup({
     name: new FormControl(''),
     age: new FormControl(null),
+    city: new FormControl(''),
   });
 
-  ngOnInit(): void {
-    this.form.valueChanges.subscribe(value => {
+  ngOnInit() {
+    this.form.valueChanges.subscribe((value: EmployeeFiltersState) => {
       this.changed.emit(value);
+    });
+
+    const { name, age, city } = this.state;
+    this.form.setValue({
+      name: name || '',
+      age: age || null,
+      city: city || '',
     });
   }
 }

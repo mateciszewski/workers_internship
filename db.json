@@ -1,0 +1,32 @@
+{
+  "workers": [
+    {
+      "name": "Kamil",
+      "isWorking": false,
+      "age": 21,
+      "city": "Białystok",
+      "id": 1
+    },
+    {
+      "name": "Mateusz",
+      "isWorking": true,
+      "age": 30,
+      "city": "Poznań",
+      "id": 2
+    },
+    {
+      "name": "Patryk",
+      "isWorking": true,
+      "age": 22,
+      "city": "Wrocław",
+      "id": 3
+    },
+    {
+      "name": "Błażej",
+      "isWorking": false,
+      "age": 22,
+      "city": "Olsztyn",
+      "id": 4
+    }
+  ]
+}

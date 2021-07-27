@@ -1,0 +1,17 @@
+.header{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height:20%;
+  box-shadow: 1px 5px 5px rgba(0,0,0,0.1);
+}
+
+.add-worker-btn{
+  width: 50%;
+}
+.workers-list{
+  display: flex;
+  width: 50%;
+  flex-wrap: wrap;
+}

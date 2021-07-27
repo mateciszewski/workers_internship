@@ -1,52 +1,78 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {Employee} from '../../../core/models/employee';
-import {EmployeeFiltersState} from '../../../core/models/employee-filters-state';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
+import type { Observable } from 'rxjs/internal/Observable';
+import type { Employee } from '../../../core/models/employee';
+import type { EmployeeFiltersState } from '../../../core/models/employee-filters-state';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WorkersService {
   private workers$: BehaviorSubject<Employee[]>;
   private filtersSubject$: BehaviorSubject<EmployeeFiltersState> = new BehaviorSubject({});
 
   public list$: Observable<Employee[]>;
-  public filters$ = this.filtersSubject$.asObservable()
-    .pipe(map(filters => Object.keys(filters).reduce((acc, key) => ({
-      ...acc,
-      ...(!!filters[key] ? {[key]: filters[key]} : {})
-    }), {})));
+  public filters$ = this.filtersSubject$.asObservable().pipe(
+    map(
+      (filters) =>
+        Object.keys(filters).reduce(
+          (acc, key) => ({
+            ...acc,
+            ...(!!filters[key] ? { [key]: filters[key] } : {}),
+          }),
+          {},
+        ) as EmployeeFiltersState,
+    ),
+  );
 
   constructor() {
     this.workers$ = new BehaviorSubject([]);
 
     this.list$ = combineLatest([this.workers$, this.filters$]).pipe(
       map(([workers, filters]) =>
-        workers.filter((worker: Employee) => this.checkWorkerIsValid(worker, filters)
-        )
-      )
+        workers.filter((worker) => this.checkWorkerIsValid(worker, filters)),
+      ),
     );
   }
 
-  private checkWorkerIsValid(
-    worker: Employee,
-    filters: Partial<Employee>
-  ): boolean {
-    return Object.keys(filters).every(
-      (key: string) => `${filters[key]}`.toLowerCase() === `${worker[key]}`.toLowerCase()
-    );
+  private checkWorkerIsValid(worker: Employee, filters: Partial<Employee>) {
+    return Object.keys(filters).every((key: keyof Employee) => {
+      const workerValue = worker[key];
+      const filter = String(filters[key]).toLowerCase();
+      const valueToSearch = String(workerValue).toLowerCase();
+
+      if (typeof workerValue === 'number') {
+        return valueToSearch === filter;
+      }
+      return valueToSearch.includes(filter);
+    });
   }
 
   public initialize(workers: Employee[]) {
     this.workers$.next(workers);
   }
 
-  public add(worker: Employee): void {
+  public add(worker: Employee) {
     this.workers$.next([...this.workers$.value, worker]);
   }
 
-  public setFilters(filter: Partial<Employee> = {}): void {
+  public remove(worker: Employee) {
+    const workers = this.workers$.value.filter(({ id }) => worker.id !== id);
+    this.workers$.next(workers);
+  }
+
+  public update(updatedWorker: Employee) {
+    const updatedWorkerList = this.workers$.value.map((worker) => {
+      if (worker.id === updatedWorker.id) {
+        return updatedWorker;
+      }
+      return worker;
+    });
+    this.workers$.next(updatedWorkerList);
+  }
+
+  public setFilters(filter: Partial<Employee> = {}) {
     this.filtersSubject$.next(filter);
   }
 }

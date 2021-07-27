@@ -1,3 +1,8 @@
 <div class="workers-list">
-  <app-worker-tile *ngFor="let worker of workers" [worker]="worker"></app-worker-tile>
+  <app-worker-tile
+    *ngFor="let worker of workers"
+    [worker]="worker"
+    (editedEmployee)="onEmployeeEdit($event)"
+    (removedEmployee)="onEmployeeRemove($event)"
+  ></app-worker-tile>
 </div>
