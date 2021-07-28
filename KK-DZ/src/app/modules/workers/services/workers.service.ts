@@ -18,11 +18,12 @@ export class WorkersService {
       Object.keys(filters).reduce(
         (acc, key) => ({
           ...acc,
-          ...(!!filters[key] ? { [key]: filters[key] } : {}),
+          ...(filters[key] !== '' ? { [key]: filters[key] } : {}),
         }),
         {}
       )
-    )
+    ),
+    distinctUntilChanged()
   );
 
   public autoCompleteNames$: Observable<string[]>;
@@ -36,7 +37,8 @@ export class WorkersService {
         workers.filter((worker: EmployeeEntity) =>
           this.checkWorkerIsValid(worker, filters)
         )
-      )
+      ),
+      distinctUntilChanged()
     );
 
     this.autoCompleteNames$ = this.autoCompleteValue('name');
@@ -60,29 +62,8 @@ export class WorkersService {
     this.workers$.next(workers);
   }
 
-  public add(worker: EmployeeEntity): void {
-    this.workers$.next([...this.workers$.value, worker]);
-  }
-
-  public edit(workerId: number, worker: EmployeeEntity) {
-    const editedWorkers = [...this.workers$.value];
-
-    const index = editedWorkers.findIndex((item) => item.id === workerId);
-    editedWorkers[index] = worker;
-
-    this.workers$.next(editedWorkers);
-  }
-
-  public delete(workerId: number): void {
-    this.workers$.next(this.removeWorkersWithId(workerId));
-  }
-
   public setFilters(filter: EmployeeFiltersState = {}): void {
-    this.filtersSubject$.next(filter);
-  }
-
-  private removeWorkersWithId(workerId: number): EmployeeEntity[] {
-    return this.workers$.value.filter((worker) => worker.id !== workerId);
+    this.filtersSubject$.next(this.parseFilters(filter));
   }
 
   private autoCompleteValue(key: string): Observable<string[]> {
@@ -99,5 +80,33 @@ export class WorkersService {
     key: string
   ): any[] {
     return [...new Set(workers.map((worker: EmployeeEntity) => worker[key]))];
+  }
+
+  private parseFilters(filter: EmployeeFiltersState): EmployeeFiltersState {
+    const { age, isWorking, ...parsedFilters } = filter;
+
+    if (this.isAgeValid(filter)) parsedFilters.age = Number(filter.age);
+
+    if (this.isWorkingValid(filter))
+      parsedFilters.isWorking = String(filter.isWorking) === 'true';
+
+    return parsedFilters;
+  }
+
+  private isAgeValid(filter: EmployeeFiltersState): boolean {
+    return (
+      'age' in filter &&
+      !isNaN(filter.age) &&
+      filter.age >= 15 &&
+      filter.age <= 200
+    );
+  }
+
+  private isWorkingValid(filter: EmployeeFiltersState): boolean {
+    return (
+      'isWorking' in filter &&
+      typeof filter.isWorking === 'string' &&
+      ['true', 'false'].includes(filter.isWorking)
+    );
   }
 }

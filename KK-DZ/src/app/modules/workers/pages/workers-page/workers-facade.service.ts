@@ -25,7 +25,7 @@ export class WorkersFacadeService {
 
   public add(employee: Employee): void {
     this.workersClient.post(employee).subscribe(
-      (worker) => {
+      (_) => {
         this.loadWorkers();
       },
       (_) => {
@@ -51,7 +51,7 @@ export class WorkersFacadeService {
 
   public edit(employeeId: number, employee: Employee): void {
     this.workersClient.put(employeeId, employee).subscribe(
-      (worker) => {
+      (_) => {
         this.loadWorkers();
       },
       (_) => {

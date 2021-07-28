@@ -6,8 +6,6 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  OnChanges,
-  SimpleChanges,
 } from '@angular/core';
 import { EmployeeFiltersState } from 'src/app/core/models/employee-filters-state';
 import { Subscription, combineLatest } from 'rxjs';
@@ -20,12 +18,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./workers-filters.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WorkersFiltersComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() state: EmployeeFiltersState;
-  @Output() changed = new EventEmitter<EmployeeFiltersState>();
+export class WorkersFiltersComponent implements OnInit, OnDestroy {
+  @Input() set state(value: EmployeeFiltersState) {
+    this.updateFormInputs(value);
+  }
 
   @Input() autoCompleteNames: string[];
   @Input() autoCompleteCities: string[];
+
+  @Output() changed = new EventEmitter<EmployeeFiltersState>();
 
   public form: FormGroup;
   private subscriptionFormValueChanges: Subscription;
@@ -52,31 +53,9 @@ export class WorkersFiltersComponent implements OnInit, OnChanges, OnDestroy {
       this.form.valueChanges,
     ])
       .pipe(map(([status, value]) => (status === 'VALID' ? value : {})))
-      .subscribe((value) => {
-        const newValue = Object.keys(value).reduce((acc, key) => {
-          return { ...acc, [key]: value[key] !== '' ? value[key] : null };
-        }, {});
-        this.changed.emit(newValue);
-      });
-  }
-
-  public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.state?.currentValue !== changes.state?.previousValue) {
-      this.form.patchValue(
-        {
-          name: this.state.name,
-          age: this.transformAgeFormControl(Number(this.state.age)),
-          city: this.state.city,
-          isWorking: this.transformIsWorkingFormControl(
-            String(this.state.isWorking)
-          ),
-        },
-        {
-          emitEvent: false,
-          onlySelf: true,
-        }
+      .subscribe((value) =>
+        this.changed.emit(this.emptyValuesInObjectToNull(value))
       );
-    }
   }
 
   public ngOnDestroy(): void {
@@ -87,14 +66,24 @@ export class WorkersFiltersComponent implements OnInit, OnChanges, OnDestroy {
     this.form.reset();
   }
 
-  private transformAgeFormControl(input: number): number | null {
-    if (isNaN(input)) return null;
-    const number = Number(input);
-    if (number < 15 || number > 200) return null;
-    return number;
+  private updateFormInputs(value: EmployeeFiltersState): void {
+    this.form.patchValue(
+      {
+        name: value.name,
+        age: value.age,
+        city: value.city,
+        isWorking: value.isWorking,
+      },
+      {
+        emitEvent: false,
+        onlySelf: true,
+      }
+    );
   }
 
-  private transformIsWorkingFormControl(input: string): boolean | null {
-    return ['true', 'false'].includes(input) ? input === 'true' : null;
+  private emptyValuesInObjectToNull(value: {}): {} {
+    return Object.keys(value).reduce((acc, key) => {
+      return { ...acc, [key]: String(value[key]) !== '' ? value[key] : null };
+    }, {});
   }
 }
