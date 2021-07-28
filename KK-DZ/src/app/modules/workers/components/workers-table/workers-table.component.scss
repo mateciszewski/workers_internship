@@ -1,0 +1,17 @@
+.empty-workers-table {
+  text-align: center;
+}
+
+.actions-header-cell,
+.actions-cell {
+  justify-content: center;
+  user-select: none;
+}
+
+mat-icon {
+  margin-left: 5px;
+}
+
+.action:hover {
+  cursor: pointer;
+}

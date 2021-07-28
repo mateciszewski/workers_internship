@@ -1,0 +1,39 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "name": "Dawid",
+      "isWorking": true,
+      "age": 22,
+      "city": "Olsztyn"
+    },
+    {
+      "id": 2,
+      "name": "Kamil",
+      "isWorking": true,
+      "age": 24,
+      "city": "Poznań"
+    },
+    {
+      "id": 3,
+      "name": "Błażej",
+      "isWorking": false,
+      "age": 24,
+      "city": "Warszawa"
+    },
+    {
+      "id": 4,
+      "name": "Patryk",
+      "isWorking": false,
+      "age": 30,
+      "city": "Olsztyn"
+    },
+    {
+      "id": 5,
+      "name": "Konrad",
+      "isWorking": true,
+      "age": 22,
+      "city": "Olsztyn"
+    }
+  ]
+}

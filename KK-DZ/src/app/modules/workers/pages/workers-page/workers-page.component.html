@@ -1,0 +1,24 @@
+<mat-toolbar>
+  <a class="toolbar-logo" href="/">
+    <span>Pracownicy <mat-icon>people</mat-icon></span>
+  </a>
+  <span class="spacer"></span>
+  <button mat-stroked-button (click)="openAddDialog()">
+    Dodaj pracownika <mat-icon>add_circle_outline</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="workers-page">
+  <app-workers-filters
+    [state]="filters$ | async"
+    [autoCompleteNames]="autoCompleteNames$ | async"
+    [autoCompleteCities]="autoCompleteCities$ | async"
+    (changed)="onFiltersChanged($event)"
+  ></app-workers-filters>
+  <app-workers-table
+    [workers]="list$ | async"
+    [filters]="filters$ | async"
+    (employeeEdited)="onEditEmployee($event)"
+    (employeeRemoved)="onRemovedEmployee($event)"
+  ></app-workers-table>
+</div>
